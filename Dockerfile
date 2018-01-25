@@ -59,6 +59,8 @@ RUN apk add --no-cache \
 # add cmake to the path
 ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
 
+RUN apk add --no-cache automake
+
 # Clone the SmartPeak/dependencies repository
 RUN cd /usr/local/  && \
     git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
