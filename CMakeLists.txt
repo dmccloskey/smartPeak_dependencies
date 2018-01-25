@@ -58,8 +58,8 @@
 ##       - however: exec_process seems to handle our arguments incorrectly (at least on Windows). Check functionality before you commit!
 
 # Determine what to build (all or single library)
-set( BUILD_TYPE LIST CACHE STRING "Can be used to restrict building to a single library: ALL,SEQAN,LIBSVM,XERCESC,BOOST,GSL,COINOR,BZIP2,ZLIB,GLPK,KISSFFT")
-set( VALID_BUILD_TYPES "ALL" "SEQAN" "LIBSVM" "XERCESC" "BOOST" "COINOR" "BZIP2" "ZLIB" "GLPK" "EIGEN" "WILDMAGIC" "SQLITE" "KISSFFT")
+set( BUILD_TYPE LIST CACHE STRING "Can be used to restrict building to a single library: ALL,BOOST,GSL,COINOR,BZIP2,ZLIB,GLPK")
+set( VALID_BUILD_TYPES "ALL" "BOOST" "COINOR" "BZIP2" "ZLIB" "GLPK" "WILDMAGIC" "SQLITE")
 
 # check build type
 if (BUILD_TYPE STREQUAL "HELP" OR BUILD_TYPE STREQUAL "LIST")
