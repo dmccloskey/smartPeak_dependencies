@@ -48,14 +48,7 @@ RUN apk add --no-cache \
     patch \
     libtool \
     make \
-    git \
-    software-properties-common \
-    python-software-properties \
-    boost-all-dev \
-    glpk-dev \
-    zip-dev \
-    zlib1g-dev \
-    bz2-dev && \
+    git && \
     # install cmake from source
     cd /usr/local/ && \
     wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
