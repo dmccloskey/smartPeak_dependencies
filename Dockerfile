@@ -67,17 +67,17 @@ RUN cd /usr/local/  && \
     mkdir /usr/local/dependencies-build/  && \
     # Build SmartPeak/dependencies
     cd /usr/local/dependencies-build/  && \
-    cmake -DBUILD_TYPE=WILDMAGIC ../dependencies && \
-    cmake -DBUILD_TYPE=COINOR ../dependencies && \
-    cmake -DBUILD_TYPE=ZLIB ../dependencies && \
-    cmake -DBUILD_TYPE=BZIP2 ../dependencies && \
-    cmake -DBUILD_TYPE=GLPK ../dependencies && \
-    cmake -DBUILD_TYPE=SQLITE ../dependencies && \
-    cmake -DBUILD_TYPE=BOOST ../dependencies
+    cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=ZLIB ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=BZIP2 ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=GLPK ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=BOOST ../smartPeak_dependencies
 	
 # create a user
 ENV HOME /home/user
-RUN adduser -D -m -h $HOME user \
+RUN adduser --group -D -m -h $HOME user \
     && chmod -R u+rwx $HOME \
     && chown -R user:user $HOME
 
