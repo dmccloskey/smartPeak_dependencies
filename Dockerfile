@@ -33,30 +33,16 @@ RUN apk add --no-cache \
     procps
 	
 # Install lapack and blas
-RUN apk add --no-cache -y \
-    atlas-base-dev \
-    #jpeg62-dev \
-    freetype6 \
-    png12-dev \
-    agg-dev \
-    pkg-config \
+RUN apk add --no-cache \
     gfortran \
-    \
     openblas-dev \
     lapack-dev \
-    zmq-dev \	
-    \
-    readline-gplv2-dev \
+    zmq-dev \
     ncursesw5-dev \
     ssl-dev \
     sqlite3-dev \
     tk-dev \
     gdbm-dev \
-    c6-dev \
-    bz2-dev \
-    hdf5-dev \
-    #cupti-dev \
-    pq-dev
 
 # Install SmartPeak dependencies
 RUN apk add --no-cache \
