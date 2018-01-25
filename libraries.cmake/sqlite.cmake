@@ -2,15 +2,15 @@
 ###       SQLITE                               ###
 ##################################################
 
-MACRO( OPENMS_CONTRIB_BUILD_SQLITE )
-  OPENMS_LOGHEADER_LIBRARY("SQLITE")
+MACRO( SMARTPEAK_CONTRIB_BUILD_SQLITE )
+  SMARTPEAK_LOGHEADER_LIBRARY("SQLITE")
   #extract: (takes very long.. so skip if possible)
   if(MSVC)
     set(ZIP_ARGS "x -y -osrc")
   else()
     set(ZIP_ARGS "xzf")
   endif(MSVC)
-  OPENMS_SMARTEXTRACT(ZIP_ARGS ARCHIVE_SQLITE "SQLITE" "INSTALL")
+  SMARTPEAK_SMARTEXTRACT(ZIP_ARGS ARCHIVE_SQLITE "SQLITE" "INSTALL")
   
   if(MSVC)
     message( STATUS "Building SQLITE library in  ${SQLITE_DIR}")
@@ -111,4 +111,4 @@ MACRO( OPENMS_CONTRIB_BUILD_SQLITE )
     endif()
 endif()
 
-ENDMACRO( OPENMS_CONTRIB_BUILD_SQLITE )
+ENDMACRO( SMARTPEAK_CONTRIB_BUILD_SQLITE )

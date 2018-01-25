@@ -2,15 +2,15 @@
 ###       BZIP2   														 ###
 ##################################################
 
-MACRO( OPENMS_CONTRIB_BUILD_BZIP2 )
-  OPENMS_LOGHEADER_LIBRARY("bzip2")
+MACRO( SMARTPEAK_CONTRIB_BUILD_BZIP2 )
+  SMARTPEAK_LOGHEADER_LIBRARY("bzip2")
 
 	if(MSVC)
     set(ZIP_ARGS "x -y -osrc")
   else()
     set(ZIP_ARGS "xzf")
   endif()
-  OPENMS_SMARTEXTRACT(ZIP_ARGS ARCHIVE_BZIP2 "bzip2" "README")
+  SMARTPEAK_SMARTEXTRACT(ZIP_ARGS ARCHIVE_BZIP2 "bzip2" "README")
 
 	## we use our own CMakeLists.txt for bzip2
 	## if bzip is update, ensure that the CMakeLists.txt is still valid
@@ -139,4 +139,4 @@ MACRO( OPENMS_CONTRIB_BUILD_BZIP2 )
 		endif()
 endif()
 
-ENDMACRO( OPENMS_CONTRIB_BUILD_BZIP2 )
+ENDMACRO( SMARTPEAK_CONTRIB_BUILD_BZIP2 )

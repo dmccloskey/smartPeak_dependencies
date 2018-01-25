@@ -2,15 +2,15 @@
 ###       ZLIB   							   ###
 ##################################################
 
-MACRO( OPENMS_CONTRIB_BUILD_ZLIB )
-  OPENMS_LOGHEADER_LIBRARY("zlib")
+MACRO( SMARTPEAK_CONTRIB_BUILD_ZLIB )
+  SMARTPEAK_LOGHEADER_LIBRARY("zlib")
   #extract: (takes very long.. so skip if possible)
   if(MSVC)
     set(ZIP_ARGS "x -y -osrc")
   else()
     set(ZIP_ARGS "xzf")
   endif()
-  OPENMS_SMARTEXTRACT(ZIP_ARGS ARCHIVE_ZLIB "ZLIB" "README")
+  SMARTPEAK_SMARTEXTRACT(ZIP_ARGS ARCHIVE_ZLIB "ZLIB" "README")
 	
   ## build the obj/lib
   if (MSVC)
@@ -18,7 +18,7 @@ MACRO( OPENMS_CONTRIB_BUILD_ZLIB )
     if(NOT BUILD_SHARED_LIBRARIES)			
         set(PATCH_FILE "${PATCH_DIR}/zlib/zlib_cmakelists.diff")
         set(PATCHED_FILE "${ZLIB_DIR}/CMakeLists.txt")
-        OPENMS_PATCH( PATCH_FILE ZLIB_DIR PATCHED_FILE)
+        SMARTPEAK_PATCH( PATCH_FILE ZLIB_DIR PATCHED_FILE)
     endif()
 		
     message(STATUS "Generating zlib build system .. ")
@@ -153,4 +153,4 @@ MACRO( OPENMS_CONTRIB_BUILD_ZLIB )
 
 endif()
 
-ENDMACRO( OPENMS_CONTRIB_BUILD_ZLIB )
+ENDMACRO( SMARTPEAK_CONTRIB_BUILD_ZLIB )

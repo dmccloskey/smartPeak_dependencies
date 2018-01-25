@@ -2,8 +2,8 @@
 ###       BOOST                                ###
 ##################################################
 
-MACRO( OPENMS_CONTRIB_BUILD_BOOST)
-  OPENMS_LOGHEADER_LIBRARY("BOOST")
+MACRO( SMARTPEAK_CONTRIB_BUILD_BOOST)
+  SMARTPEAK_LOGHEADER_LIBRARY("BOOST")
   
   set( BOOST_BUILD_TYPE "static")
   if (BUILD_SHARED_LIBRARIES)
@@ -16,7 +16,7 @@ MACRO( OPENMS_CONTRIB_BUILD_BOOST)
   else()
     set(ZIP_ARGS "xzf")
   endif()
-  OPENMS_SMARTEXTRACT(ZIP_ARGS ARCHIVE_BOOST "BOOST" "index.htm")
+  SMARTPEAK_SMARTEXTRACT(ZIP_ARGS ARCHIVE_BOOST "BOOST" "index.htm")
   
   if(MSVC) ## build boost library for windows
     
@@ -167,4 +167,4 @@ MACRO( OPENMS_CONTRIB_BUILD_BOOST)
     endif()
   endif()
 
-ENDMACRO(OPENMS_CONTRIB_BUILD_BOOST)
+ENDMACRO(SMARTPEAK_CONTRIB_BUILD_BOOST)

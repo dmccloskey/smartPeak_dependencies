@@ -2,15 +2,15 @@
 ###       GLPK     														 ###
 ##################################################
 
-MACRO( OPENMS_CONTRIB_BUILD_GLPK )
-  OPENMS_LOGHEADER_LIBRARY("glpk")
+MACRO( SMARTPEAK_CONTRIB_BUILD_GLPK )
+  SMARTPEAK_LOGHEADER_LIBRARY("glpk")
   #extract: (takes very long.. so skip if possible)
   if(MSVC)
     set(ZIP_ARGS "x -y -osrc")
   else()
     set(ZIP_ARGS "xzf")
   endif()
-  OPENMS_SMARTEXTRACT(ZIP_ARGS ARCHIVE_GLPK "GLPK" "README")
+  SMARTPEAK_SMARTEXTRACT(ZIP_ARGS ARCHIVE_GLPK "GLPK" "README")
 
   ## build the obj/lib
   if (MSVC)
@@ -132,4 +132,4 @@ MACRO( OPENMS_CONTRIB_BUILD_GLPK )
 endif()
 
 
-ENDMACRO( OPENMS_CONTRIB_BUILD_GLPK )
+ENDMACRO( SMARTPEAK_CONTRIB_BUILD_GLPK )
