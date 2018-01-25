@@ -22,7 +22,7 @@ ENV SMARTPEAK_DEPENDENCIES_VERSION master
 
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
 # procps is very common in build systems, and is a reasonably small package
-RUN apk add --no-cache -y \
+RUN apk add --no-cache \
     curl \
     bzr \
     git \
@@ -30,39 +30,36 @@ RUN apk add --no-cache -y \
     openssh-client \
     subversion \
     --no-install-recommends\
-    procps \
-	&& rm -rf /var/lib/apt/lists/*
+    procps
 	
 # Install lapack and blas
 RUN apk add --no-cache -y \
-    libatlas-base-dev \
-    #libjpeg62-dev \
-    libfreetype6 \
-    libpng12-dev \
-    libagg-dev \
+    atlas-base-dev \
+    #jpeg62-dev \
+    freetype6 \
+    png12-dev \
+    agg-dev \
     pkg-config \
     gfortran \
     \
-    libopenblas-dev \
-    liblapack-dev \
-    libzmq-dev \	
+    openblas-dev \
+    lapack-dev \
+    zmq-dev \	
     \
-    libreadline-gplv2-dev \
-    libncursesw5-dev \
-    libssl-dev \
-    libsqlite3-dev \
+    readline-gplv2-dev \
+    ncursesw5-dev \
+    ssl-dev \
+    sqlite3-dev \
     tk-dev \
-    libgdbm-dev \
-    libc6-dev \
-    libbz2-dev \
-    libhdf5-dev \
-    libpq-dev \
-    #libcupti-dev \
-	--no-install-recommends \
-	&& rm -rf /var/lib/apt/lists/*
+    gdbm-dev \
+    c6-dev \
+    bz2-dev \
+    hdf5-dev \
+    #cupti-dev \
+    pq-dev
 
 # Install SmartPeak dependencies
-RUN apk add --no-cache -y \
+RUN apk add --no-cache \
     cmake \
     g++ \
     autoconf \
@@ -72,15 +69,11 @@ RUN apk add --no-cache -y \
     git \
     software-properties-common \
     python-software-properties \
-    libboost-all-dev \
-    libglpk-dev \
-    libzip-dev \
+    boost-all-dev \
+    glpk-dev \
+    zip-dev \
     zlib1g-dev \
-	--no-install-recommends \
-    libbz2-dev && \
-    apt-get clean && \
-    apt-get purge && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    bz2-dev && \
     # install cmake from source
     cd /usr/local/ && \
     wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
