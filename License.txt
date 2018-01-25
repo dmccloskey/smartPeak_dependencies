@@ -1,4 +1,4 @@
-The OpenMS contrib package contains third party libraries needed by OpenMS.
+The SmartPeak contrib package contains third party libraries needed by SmartPeak.
 The libraries and their respective license files are listed below.
 
 Boost

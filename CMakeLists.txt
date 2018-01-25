@@ -349,7 +349,7 @@ include ("${CMAKE_SOURCE_DIR}/libraries.cmake/wildmagic.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/sqlite.cmake")
 
 ## build mac os x specific C/C++ flags
-set( OPENMS_DEPENDENCIES_MACOSX_MIXED_MODE 0 CACHE INTERNAL "building multiple architectures on MacOSX" FORCE)
+set( SMARTPEAK_DEPENDENCIES_MACOSX_MIXED_MODE 0 CACHE INTERNAL "building multiple architectures on MacOSX" FORCE)
 
 list(FIND VALID_BUILD_TYPES ${BUILD_TYPE} list_pos)
 if( ${list_pos} EQUAL -1 )
@@ -380,8 +380,8 @@ set( BUILD_SHARED_LIBRARIES Off CACHE BOOL "Builds all dependencies libraries as
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "BZIP2")
-  OPENMS_CLEAN_LIB("BZIP2")
-  OPENMS_DEPENDENCIES_BUILD_BZIP2()
+  SMARTPEAK_CLEAN_LIB("BZIP2")
+  SMARTPEAK_DEPENDENCIES_BUILD_BZIP2()
 endif()
 
 ##################################################
@@ -389,8 +389,8 @@ endif()
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "ZLIB")
-  OPENMS_CLEAN_LIB("ZLIB")
-  OPENMS_DEPENDENCIES_BUILD_ZLIB()
+  SMARTPEAK_CLEAN_LIB("ZLIB")
+  SMARTPEAK_DEPENDENCIES_BUILD_ZLIB()
 endif()
 
 ##################################################
@@ -398,8 +398,8 @@ endif()
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "BOOST")
-  OPENMS_CLEAN_LIB("BOOST")
-  OPENMS_DEPENDENCIES_BUILD_BOOST()
+  SMARTPEAK_CLEAN_LIB("BOOST")
+  SMARTPEAK_DEPENDENCIES_BUILD_BOOST()
 endif()
 
 
@@ -408,9 +408,9 @@ endif()
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "GLPK")
-  OPENMS_CLEAN_LIB("GLPK")
-  OPENMS_DEPENDENCIES_BUILD_GLPK()
-  OPENMS_COPY_LIBS("GLPK")
+  SMARTPEAK_CLEAN_LIB("GLPK")
+  SMARTPEAK_DEPENDENCIES_BUILD_GLPK()
+  SMARTPEAK_COPY_LIBS("GLPK")
 endif()
 
 ##################################################
@@ -418,9 +418,9 @@ endif()
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "COINOR")
-  OPENMS_CLEAN_LIB("COINOR")
-  OPENMS_DEPENDENCIES_BUILD_COINOR()
-  OPENMS_COPY_LIBS("COINOR")
+  SMARTPEAK_CLEAN_LIB("COINOR")
+  SMARTPEAK_DEPENDENCIES_BUILD_COINOR()
+  SMARTPEAK_COPY_LIBS("COINOR")
 endif()
 
 ##################################################
@@ -428,9 +428,9 @@ endif()
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "WILDMAGIC")
-  OPENMS_CLEAN_LIB("WILDMAGIC")
-  OPENMS_DEPENDENCIES_BUILD_WILDMAGIC()
-  OPENMS_COPY_LIBS("WILDMAGIC")
+  SMARTPEAK_CLEAN_LIB("WILDMAGIC")
+  SMARTPEAK_DEPENDENCIES_BUILD_WILDMAGIC()
+  SMARTPEAK_COPY_LIBS("WILDMAGIC")
 endif()
 
 ##################################################
@@ -438,9 +438,9 @@ endif()
 ##################################################
 
 if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "SQLITE")
-  OPENMS_CLEAN_LIB("SQLITE")
-  OPENMS_DEPENDENCIES_BUILD_SQLITE()
-  OPENMS_COPY_LIBS("SQLITE")
+  SMARTPEAK_CLEAN_LIB("SQLITE")
+  SMARTPEAK_DEPENDENCIES_BUILD_SQLITE()
+  SMARTPEAK_COPY_LIBS("SQLITE")
 endif()
 
 ## finally copy README.txt to project-binary directory to mark process complete
