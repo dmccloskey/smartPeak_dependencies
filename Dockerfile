@@ -23,25 +23,24 @@ ENV SMARTPEAK_DEPENDENCIES_VERSION master
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
 # procps is very common in build systems, and is a reasonably small package
 RUN apk add --no-cache \
-    curl \
+    --virtual .build-dependencies \
+    bash \
+    wget \
+    adduser \
     bzr \
     git \
     mercurial \
     openssh-client \
     subversion \
     libstdc++ \
-    procps
-	
-# Install lapack and blas
-RUN apk add --no-cache \
+    procps \
+    # Install lapack and blas
     gfortran \
     # openblas-dev \ # either openblas or lapack
     lapack-dev \
     tk-dev \
-    gdbm-dev
-
-# Install SmartPeak dependencies
-RUN apk add --no-cache \
+    gdbm-dev \
+    # Install SmartPeak dependencies
     cmake \
     g++ \
     autoconf \
@@ -49,13 +48,14 @@ RUN apk add --no-cache \
     libtool \
     make \
     git && \
+    apk del .build-dependencies && \
     # install cmake from source
     cd /usr/local/ && \
     wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
     tar xf cmake-3.8.2.tar.gz && \
     cd cmake-3.8.2 && \
     ./configure && \
-    make
+    make -j8
 
 # add cmake to the path
 ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
@@ -63,7 +63,7 @@ ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
 # Clone the SmartPeak/dependencies repository
 RUN cd /usr/local/  && \
     git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
-    cd /usr/local/dependencies && \
+    cd /usr/local/smartPeak_dependencies && \
     git checkout ${SMARTPEAK_DEPENDENCIES_VERSION} && \
     mkdir /usr/local/dependencies-build/  && \
     # Build SmartPeak/dependencies
@@ -78,7 +78,7 @@ RUN cd /usr/local/  && \
 	
 # create a user
 ENV HOME /home/user
-RUN useradd --create-home --home-dir $HOME user \
+RUN adduser -D -m -h $HOME user \
     && chmod -R u+rwx $HOME \
     && chown -R user:user $HOME
 
