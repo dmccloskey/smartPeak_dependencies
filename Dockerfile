@@ -22,50 +22,47 @@ ENV SMARTPEAK_DEPENDENCIES_VERSION master
 
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
 # procps is very common in build systems, and is a reasonably small package
-RUN apt-get update && apt-get upgrade -y \
-	&& apt-get install -y \
-		curl \
-		bzr \
-		git \
-		mercurial \
-		openssh-client \
-		subversion \
-		--no-install-recommends\
-		procps \
+RUN apk add --no-cache -y \
+    curl \
+    bzr \
+    git \
+    mercurial \
+    openssh-client \
+    subversion \
+    --no-install-recommends\
+    procps \
 	&& rm -rf /var/lib/apt/lists/*
 	
 # Install lapack and blas
-RUN apt-get update && apt-get upgrade -y \
-	&& apt-get install -y \
-		libatlas-base-dev \
-		#libjpeg62-dev \
-		libfreetype6 \
-		libpng12-dev \
-		libagg-dev \
-		pkg-config \
-		gfortran \
-		\
-		libopenblas-dev \
-		liblapack-dev \
-		libzmq-dev \	
-		\
-		libreadline-gplv2-dev \
-		libncursesw5-dev \
-		libssl-dev \
-		libsqlite3-dev \
-		tk-dev \
-		libgdbm-dev \
-		libc6-dev \
-		libbz2-dev \
-		libhdf5-dev \
-		libpq-dev \
-		#libcupti-dev \
+RUN apk add --no-cache -y \
+    libatlas-base-dev \
+    #libjpeg62-dev \
+    libfreetype6 \
+    libpng12-dev \
+    libagg-dev \
+    pkg-config \
+    gfortran \
+    \
+    libopenblas-dev \
+    liblapack-dev \
+    libzmq-dev \	
+    \
+    libreadline-gplv2-dev \
+    libncursesw5-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    tk-dev \
+    libgdbm-dev \
+    libc6-dev \
+    libbz2-dev \
+    libhdf5-dev \
+    libpq-dev \
+    #libcupti-dev \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install SmartPeak dependencies
-RUN apt-get -y update && \
-    apt-get install -y \
+RUN apk add --no-cache -y \
     cmake \
     g++ \
     autoconf \
