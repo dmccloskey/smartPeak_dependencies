@@ -23,10 +23,9 @@ ENV SMARTPEAK_DEPENDENCIES_VERSION master
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
 # procps is very common in build systems, and is a reasonably small package
 RUN apk add --no-cache \
-    --virtual .build-dependencies \
+    # --virtual .build-dependencies \
     bash \
     wget \
-    adduser \
     bzr \
     git \
     mercurial \
@@ -48,7 +47,7 @@ RUN apk add --no-cache \
     libtool \
     make \
     git && \
-    apk del .build-dependencies && \
+    # apk del .build-dependencies && \
     # install cmake from source
     cd /usr/local/ && \
     wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
