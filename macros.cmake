@@ -83,7 +83,7 @@ endmacro()
 ## @param libfile_varname Name of the variable containing the actual archive
 ## @param libname Name of the library (should be upper-case -> ${${libname}_DIR} should exist (see top of this file))
 ## @param checkfile Name of the (last) file to be extracted from the archive (we will use ${${libname}_DIR}/${checkfile} to see if it exists)
-MACRO (OPENMS_SMARTEXTRACT zip_args_varname libfile_varname libname checkfile)
+MACRO (SMARTPEAK_SMARTEXTRACT zip_args_varname libfile_varname libname checkfile)
   string(TOUPPER ${libname} libnameUP)
 
   # download the archive
@@ -144,7 +144,7 @@ MACRO (OPENMS_SMARTEXTRACT zip_args_varname libfile_varname libname checkfile)
       message(STATUS "Extracting ${libname} .. skipped (already exists)")
     endif()
   endif()
-ENDMACRO (OPENMS_SMARTEXTRACT)
+ENDMACRO (SMARTPEAK_SMARTEXTRACT)
 
 
 ## build a library with its VisualStudio solution
@@ -153,7 +153,7 @@ ENDMACRO (OPENMS_SMARTEXTRACT)
 ## @param target_varname Name of the variable that holds the target to build
 ## @param config Usually either 'Debug' or 'Release' as string
 ## @param workingdir_varname Name of the variable that holds the directory where to execute MSBuild in
-MACRO ( OPENMS_BUILDLIB libname solutionfile_varname target_varname config workingdir_varname)
+MACRO ( SMARTPEAK_BUILDLIB libname solutionfile_varname target_varname config workingdir_varname)
   message(STATUS "Building ${libname} ... ")
   file(TO_NATIVE_PATH ${${solutionfile_varname}} _sln_file_path)
   set (MSBUILD_ARGS "/p:Configuration=${config} /consoleloggerparameters:Verbosity=minimal /target:${${target_varname}} /p:Platform=${WIN_PLATFORM_ARG} \"${_sln_file_path}\"")
@@ -173,14 +173,14 @@ MACRO ( OPENMS_BUILDLIB libname solutionfile_varname target_varname config worki
     message(STATUS "Building ${libname} ... failed")
     message(FATAL_ERROR ${BUILDLIB_OUT})
   endif()
-ENDMACRO (OPENMS_BUILDLIB)
+ENDMACRO (SMARTPEAK_BUILDLIB)
 
 ## patch a file
 ## @param args_varname Name of the variable that holds all arguments to patch(.exe) [use -i instead of '<' as last argument]
 ## @param patchfile_varname Name of the variable that holds the patchfile
 ## @param workingdir_varname Name of the variable that points to the directory where the command is executed
 ## @param patchedfile_varname Name of the variable that is patched
-MACRO ( OPENMS_PATCH patchfile_varname workingdir_varname patchedfile_varname)
+MACRO ( SMARTPEAK_PATCH patchfile_varname workingdir_varname patchedfile_varname)
   ## First try: with --binary (because of EOL problems, OS and patch.exe specific)
   set( PATCH_ARGUMENTS "-p0 --binary -b -N -i") ## NOTE: always keep -i as last argument !!
   if (EXISTS ${${patchedfile_varname}}.orig)
@@ -217,13 +217,13 @@ MACRO ( OPENMS_PATCH patchfile_varname workingdir_varname patchedfile_varname)
       message(STATUS "Patching ${${patchedfile_varname}} ... done")
     endif()
   endif()
-ENDMACRO (OPENMS_PATCH)
+ENDMACRO (SMARTPEAK_PATCH)
 
 
 ## copy a directory
 ## @param dir_source Name of the variable that holds the source directory
 ## @param dir_target Name of the variable that holds the target directory
-MACRO (OPENMS_COPYDIR dir_source dir_target)
+MACRO (SMARTPEAK_COPYDIR dir_source dir_target)
 
   ## deactivated:
   ## (checking if the directory exists does not suffice, because the content (i.e. headers) might have changed due to new patches)
@@ -246,17 +246,17 @@ MACRO (OPENMS_COPYDIR dir_source dir_target)
       message(STATUS "Copying ${${dir_source}} --> ${${dir_target}} .. done")
     endif()
   #endif()
-ENDMACRO (OPENMS_COPYDIR)
+ENDMACRO (SMARTPEAK_COPYDIR)
 
 ## default header for each library in the log file
 ## @param libname Name of the lirary that is shown in the library
-MACRO (OPENMS_LOGHEADER_LIBRARY libname)
+MACRO (SMARTPEAK_LOGHEADER_LIBRARY libname)
     file(APPEND ${LOGFILE} "\n\r")
     file(APPEND ${LOGFILE} " ------------------------------------------------------------------------\n\r")
     file(APPEND ${LOGFILE} "                              ${libname}\n\r")
     file(APPEND ${LOGFILE} " ------------------------------------------------------------------------\n\r")
     file(APPEND ${LOGFILE} "\n\r")
-ENDMACRO (OPENMS_LOGHEADER_LIBRARY)
+ENDMACRO (SMARTPEAK_LOGHEADER_LIBRARY)
 
 #############################################################################################
 ##################################  CLEANING MACROS  ########################################
@@ -264,17 +264,17 @@ ENDMACRO (OPENMS_LOGHEADER_LIBRARY)
 
 ## Removes all installed files from the specified contrib package
 ## @param libname Name of the package that should be cleaned
-MACRO (OPENMS_CLEAN_LIB libname)
+MACRO (SMARTPEAK_CLEAN_LIB libname)
   if( FORCE_REBUILD MATCHES "ON") # find & delete all installed
-    OPENMS_CLEAN_INSTALLED_LIBS(${libname})
-    OPENMS_CLEAN_HEADERS(${libname})
-    OPENMS_CLEAN_SOURCE(${libname})
+    SMARTPEAK_CLEAN_INSTALLED_LIBS(${libname})
+    SMARTPEAK_CLEAN_HEADERS(${libname})
+    SMARTPEAK_CLEAN_SOURCE(${libname})
   endif()
-ENDMACRO (OPENMS_CLEAN_LIB libname)
+ENDMACRO (SMARTPEAK_CLEAN_LIB libname)
 
 # removes all files installed on windows libraries
 # @param libname Name of the library that should be removed
-MACRO (OPENMS_CLEAN_INSTALLED_LIBS libname)
+MACRO (SMARTPEAK_CLEAN_INSTALLED_LIBS libname)
   string(TOUPPER ${libname} libnameUP)
   # remove libs
   message(STATUS "Removing library files installed by ${libname} .. ")
@@ -303,11 +303,11 @@ MACRO (OPENMS_CLEAN_INSTALLED_LIBS libname)
   else()
     message(STATUS "Removing library files installed by ${libname} .. skipped")
   endif()
-ENDMACRO (OPENMS_CLEAN_INSTALLED_LIBS libname)
+ENDMACRO (SMARTPEAK_CLEAN_INSTALLED_LIBS libname)
 
 # remove all header files installed by the library
 # @param libname Name of the library
-MACRO (OPENMS_CLEAN_HEADERS libname)
+MACRO (SMARTPEAK_CLEAN_HEADERS libname)
  string(TOUPPER ${libname} libnameUP)
  # delete header files
   message(STATUS "Removing header files installed by ${libname} .. ")
@@ -349,9 +349,9 @@ MACRO (OPENMS_CLEAN_HEADERS libname)
   else()
     message(STATUS "Removing header files installed by ${libname} .. skipped")
   endif()
-ENDMACRO(OPENMS_CLEAN_HEADERS libname)
+ENDMACRO(SMARTPEAK_CLEAN_HEADERS libname)
 
-MACRO(OPENMS_CLEAN_SOURCE libname)
+MACRO(SMARTPEAK_CLEAN_SOURCE libname)
   string(TOUPPER ${libname} libnameUP)
   message(STATUS "Removing ${libname} source directory .. ")
   if(EXISTS "${${libnameUP}_DIR}")
@@ -387,7 +387,7 @@ MACRO(OPENMS_CLEAN_SOURCE libname)
       endif()
     endif()
   endif(MSVC)
-ENDMACRO(OPENMS_CLEAN_SOURCE libname)
+ENDMACRO(SMARTPEAK_CLEAN_SOURCE libname)
 
 #############################################################################################
 ####################################  COPY MACROS  ##########################################
@@ -397,7 +397,7 @@ ENDMACRO(OPENMS_CLEAN_SOURCE libname)
 ## copies all created lib files from a specific library to the
 ## contrib/lib dir -- is only active under MSVC
 ## @param libname Name of the library
-MACRO(OPENMS_COPY_LIBS libname)
+MACRO(SMARTPEAK_COPY_LIBS libname)
   ## TODO: Revise this and look for another solution
   ## copy *.lib, *.dll  etc to ./lib
   string(TOUPPER ${libname} libnameUP)
@@ -417,7 +417,7 @@ MACRO(OPENMS_COPY_LIBS libname)
     endforeach()
     message(STATUS "Copying ${libname} libraries .. done")
   endif()
-ENDMACRO(OPENMS_COPY_LIBS libname)
+ENDMACRO(SMARTPEAK_COPY_LIBS libname)
 
 ########
 ########
