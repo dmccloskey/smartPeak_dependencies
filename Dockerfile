@@ -42,7 +42,7 @@ RUN apk add --no-cache \
     ssl-dev \
     sqlite3-dev \
     tk-dev \
-    gdbm-dev \
+    gdbm-dev
 
 # Install SmartPeak dependencies
 RUN apk add --no-cache \
