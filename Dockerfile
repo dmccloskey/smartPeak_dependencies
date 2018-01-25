@@ -30,14 +30,12 @@ RUN apk add --no-cache \
     openssh-client \
     subversion \
     libstdc++ \
-    openblas-dev \
-    --no-install-recommends\
     procps
 	
 # Install lapack and blas
 RUN apk add --no-cache \
     gfortran \
-    openblas-dev \
+    # openblas-dev \ # either openblas or lapack
     lapack-dev \
     tk-dev \
     gdbm-dev
