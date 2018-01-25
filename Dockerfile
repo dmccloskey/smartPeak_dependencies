@@ -65,9 +65,9 @@ RUN cd /usr/local/  && \
     git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
     cd /usr/local/smartPeak_dependencies && \
     git checkout ${SMARTPEAK_DEPENDENCIES_VERSION} && \
-    mkdir /usr/local/dependencies-build/  && \
+    mkdir /usr/local/contrib-build/  && \
     # Build SmartPeak/dependencies
-    cd /usr/local/dependencies-build/  && \
+    cd /usr/local/contrib-build/  && \
     cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=ZLIB ../smartPeak_dependencies && \
