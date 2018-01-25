@@ -3,7 +3,7 @@
 ##################################################
 
 ## build and install eigen
-macro( SMARTPEAK_CONTRIB_BUILD_WILDMAGIC )
+macro( SMARTPEAK_DEPENDENCIES_BUILD_WILDMAGIC )
 
   SMARTPEAK_LOGHEADER_LIBRARY("wildmagic")
 
@@ -120,4 +120,4 @@ macro( SMARTPEAK_CONTRIB_BUILD_WILDMAGIC )
   		message(STATUS "Building wildmagic library (Debug) .. done")
   	endif()
   endif()
-endmacro( SMARTPEAK_CONTRIB_BUILD_WILDMAGIC )
+endmacro( SMARTPEAK_DEPENDENCIES_BUILD_WILDMAGIC )

@@ -2,7 +2,7 @@
 ###       ZLIB   							   ###
 ##################################################
 
-MACRO( SMARTPEAK_CONTRIB_BUILD_ZLIB )
+MACRO( SMARTPEAK_DEPENDENCIES_BUILD_ZLIB )
   SMARTPEAK_LOGHEADER_LIBRARY("zlib")
   #extract: (takes very long.. so skip if possible)
   if(MSVC)
@@ -153,4 +153,4 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_ZLIB )
 
 endif()
 
-ENDMACRO( SMARTPEAK_CONTRIB_BUILD_ZLIB )
+ENDMACRO( SMARTPEAK_DEPENDENCIES_BUILD_ZLIB )

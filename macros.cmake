@@ -130,7 +130,7 @@ MACRO (SMARTPEAK_SMARTEXTRACT zip_args_varname libfile_varname libname checkfile
     message(STATUS "Extracting ${libname} .. ")
     if (NOT EXISTS ${${libnameUP}_DIR}/${checkfile}) ## last file to be extracted
       exec_program(${PROGRAM_ZIP} ${PROJECT_BINARY_DIR}
-        ARGS ${${zip_args_varname}} "${PROJECT_BINARY_DIR}/archives/${${libfile_varname}}" " -C " ${CONTRIB_BIN_SOURCE_DIR}
+        ARGS ${${zip_args_varname}} "${PROJECT_BINARY_DIR}/archives/${${libfile_varname}}" " -C " ${DEPENDENCIES_BIN_SOURCE_DIR}
         OUTPUT_VARIABLE ZIP_OUT
         RETURN_VALUE EXTRACT_SUCCESS)
 
@@ -157,7 +157,7 @@ MACRO ( SMARTPEAK_BUILDLIB libname solutionfile_varname target_varname config wo
   message(STATUS "Building ${libname} ... ")
   file(TO_NATIVE_PATH ${${solutionfile_varname}} _sln_file_path)
   set (MSBUILD_ARGS "/p:Configuration=${config} /consoleloggerparameters:Verbosity=minimal /target:${${target_varname}} /p:Platform=${WIN_PLATFORM_ARG} \"${_sln_file_path}\"")
-  if(NOT CONTRIB_MSVC_VERSION STREQUAL "8")
+  if(NOT DEPENDENCIES_MSVC_VERSION STREQUAL "8")
     set (MSBUILD_ARGS "${MSBUILD_ARGS} /maxcpucount")
   endif()
 
@@ -288,7 +288,7 @@ MACRO (SMARTPEAK_CLEAN_INSTALLED_LIBS libname)
 
   foreach (FTD ${LIB_FILES})
     get_filename_component(RFTD ${FTD} NAME)
-    execute_process(COMMAND ${CMAKE_COMMAND} -E remove "\"${CONTRIB_BIN_LIB_DIR}/${RFTD}\""
+    execute_process(COMMAND ${CMAKE_COMMAND} -E remove "\"${DEPENDENCIES_BIN_LIB_DIR}/${RFTD}\""
                     OUTPUT_VARIABLE DELETE_LIB_OUT
                     RESULT_VARIABLE DELETE_LIB_SUCCESS)
     if( NOT DELETE_LIB_SUCCESS EQUAL 0)
@@ -406,7 +406,7 @@ MACRO(SMARTPEAK_COPY_LIBS libname)
     file(GLOB_RECURSE LIB_FILES "${${libnameUP}_DIR}/*.lib" "${${libnameUP}_DIR}/*.dll")
 
     foreach (FTC ${LIB_FILES})
-      execute_process(COMMAND ${CMAKE_COMMAND} -E copy "${FTC}" "${CONTRIB_BIN_LIB_DIR}"
+      execute_process(COMMAND ${CMAKE_COMMAND} -E copy "${FTC}" "${DEPENDENCIES_BIN_LIB_DIR}"
                       OUTPUT_VARIABLE COPY_LIB_OUT
                       RESULT_VARIABLE COPY_LIB_SUCCESS)
       if( NOT COPY_LIB_SUCCESS EQUAL 0)

@@ -2,7 +2,7 @@
 ###       BOOST                                ###
 ##################################################
 
-MACRO( SMARTPEAK_CONTRIB_BUILD_BOOST)
+MACRO( SMARTPEAK_DEPENDENCIES_BUILD_BOOST)
   SMARTPEAK_LOGHEADER_LIBRARY("BOOST")
   
   set( BOOST_BUILD_TYPE "static")
@@ -21,7 +21,7 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_BOOST)
   if(MSVC) ## build boost library for windows
     
     ## omitting the version (i.e. 'toolset=msvc'), causes Boost to use the latest(!) VS it can find the system -- irrespective of the current env (and its cl.exe)
-    set(TOOLSET "toolset=msvc-${CONTRIB_MSVC_VERSION}.0") 
+    set(TOOLSET "toolset=msvc-${DEPENDENCIES_MSVC_VERSION}.0") 
     
     if (NOT QUICKBUILD)
       ## not a Visual Studio project .. just build by hand
@@ -167,4 +167,4 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_BOOST)
     endif()
   endif()
 
-ENDMACRO(SMARTPEAK_CONTRIB_BUILD_BOOST)
+ENDMACRO(SMARTPEAK_DEPENDENCIES_BUILD_BOOST)

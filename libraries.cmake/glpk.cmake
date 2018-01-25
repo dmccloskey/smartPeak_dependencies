@@ -2,7 +2,7 @@
 ###       GLPK     														 ###
 ##################################################
 
-MACRO( SMARTPEAK_CONTRIB_BUILD_GLPK )
+MACRO( SMARTPEAK_DEPENDENCIES_BUILD_GLPK )
   SMARTPEAK_LOGHEADER_LIBRARY("glpk")
   #extract: (takes very long.. so skip if possible)
   if(MSVC)
@@ -132,4 +132,4 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_GLPK )
 endif()
 
 
-ENDMACRO( SMARTPEAK_CONTRIB_BUILD_GLPK )
+ENDMACRO( SMARTPEAK_DEPENDENCIES_BUILD_GLPK )

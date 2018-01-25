@@ -4,7 +4,7 @@
 ## COIN-OR from http://www.coin-or.org/download/source/CoinMP/CoinMP-1.3.3.tgz
 ## repacked installed files and created VisualStudio 2008 files
 
-MACRO( SMARTPEAK_CONTRIB_BUILD_COINOR)
+MACRO( SMARTPEAK_DEPENDENCIES_BUILD_COINOR)
   SMARTPEAK_LOGHEADER_LIBRARY("COINOR")
   ## extract: (takes very long.. so skip if possible)
   if(MSVC)
@@ -24,7 +24,7 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_COINOR)
     # set(PATCHED_FILE "${COINOR_DIR}/CoinUtils/src/CoinLpIO.cpp")
     # SMARTPEAK_PATCH( PATCH_FILE COINOR_DIR PATCHED_FILE)
 	
-    set(MSBUILD_ARGS_SLN "${COINOR_DIR}/CoinMP/MSVisualStudio/v${CONTRIB_MSVC_VERSION}/CoinMP.sln")
+    set(MSBUILD_ARGS_SLN "${COINOR_DIR}/CoinMP/MSVisualStudio/v${DEPENDENCIES_MSVC_VERSION}/CoinMP.sln")
     set(MSBUILD_ARGS_TARGET "libCbc")
     SMARTPEAK_BUILDLIB("CoinOR-Cbc (Debug)" MSBUILD_ARGS_SLN MSBUILD_ARGS_TARGET "Debug" COINOR_DIR)
     SMARTPEAK_BUILDLIB("CoinOR-Cbc (Release)" MSBUILD_ARGS_SLN MSBUILD_ARGS_TARGET "Release" COINOR_DIR)
@@ -139,8 +139,8 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_COINOR)
       --prefix=${PROJECT_BINARY_DIR}
       ## Following two lines can be combined with prefix
       ## But maybe they avoid building the doc into share (wanted?)
-      #--libdir=${CONTRIB_BIN_LIB_DIR} 
-      #--includedir=${CONTRIB_BIN_INCLUDE_DIR}
+      #--libdir=${DEPENDENCIES_BIN_LIB_DIR} 
+      #--includedir=${DEPENDENCIES_BIN_INCLUDE_DIR}
       ${STATIC_BUILD}
       ${SHARED_BUILD}
       --with-lapack=no
@@ -184,4 +184,4 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_COINOR)
     endif()
   endif()
 
-ENDMACRO( SMARTPEAK_CONTRIB_BUILD_COINOR )
+ENDMACRO( SMARTPEAK_DEPENDENCIES_BUILD_COINOR )

@@ -2,7 +2,7 @@
 ###       SQLITE                               ###
 ##################################################
 
-MACRO( SMARTPEAK_CONTRIB_BUILD_SQLITE )
+MACRO( SMARTPEAK_DEPENDENCIES_BUILD_SQLITE )
   SMARTPEAK_LOGHEADER_LIBRARY("SQLITE")
   #extract: (takes very long.. so skip if possible)
   if(MSVC)
@@ -111,4 +111,4 @@ MACRO( SMARTPEAK_CONTRIB_BUILD_SQLITE )
     endif()
 endif()
 
-ENDMACRO( SMARTPEAK_CONTRIB_BUILD_SQLITE )
+ENDMACRO( SMARTPEAK_DEPENDENCIES_BUILD_SQLITE )
