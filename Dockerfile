@@ -43,6 +43,7 @@ RUN apk add --no-cache \
     cmake \
     g++ \
     autoconf \
+    automake \
     patch \
     libtool \
     make \
@@ -58,8 +59,6 @@ RUN apk add --no-cache \
 
 # add cmake to the path
 ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
-
-RUN apk add --no-cache automake
 
 # Clone the SmartPeak/dependencies repository
 RUN cd /usr/local/  && \
@@ -79,7 +78,8 @@ RUN cd /usr/local/  && \
 	
 # create a user
 ENV HOME /home/user
-RUN adduser --group -D -m -h $HOME user \
+RUN mkdir /home/user \
+    && adduser -D -h $HOME user \
     && chmod -R u+rwx $HOME \
     && chown -R user:user $HOME
 
