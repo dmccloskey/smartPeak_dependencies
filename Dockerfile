@@ -29,6 +29,7 @@ RUN apk add --no-cache \
     mercurial \
     openssh-client \
     subversion \
+    openblas-dev \
     --no-install-recommends\
     procps
 	
