@@ -37,10 +37,6 @@ RUN apk add --no-cache \
     gfortran \
     openblas-dev \
     lapack-dev \
-    zmq-dev \
-    ncursesw5-dev \
-    ssl-dev \
-    sqlite3-dev \
     tk-dev \
     gdbm-dev
 
