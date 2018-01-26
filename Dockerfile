@@ -78,23 +78,23 @@ RUN cd /usr/local/  && \
     cmake -DBUILD_TYPE=BZIP2 ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=GLPK ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=BOOST ../smartPeak_dependencies && \
-    # clone the OpenMS repository
-    cd /usr/local/  && \
-    git clone ${OPENMS_REPOSITORY} && \
-    cd /usr/local/OpenMS/ && \
-    git checkout ${OPENMS_VERSION} && \
-    cd /usr/local/ && \
-    mkdir openms-build && \
-    cd /usr/local/openms-build/ && \
-    # build the OpenMS executables
-    cmake -DPYOPENMS=OFF -DCMAKE_PREFIX_PATH="/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local" -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
-    make -j8
+    cmake -DBUILD_TYPE=BOOST ../smartPeak_dependencies
+    ## clone the OpenMS repository
+    #cd /usr/local/  && \
+    #git clone ${OPENMS_REPOSITORY} && \
+    #cd /usr/local/OpenMS/ && \
+    #git checkout ${OPENMS_VERSION} && \
+    #cd /usr/local/ && \
+    #mkdir openms-build && \
+    #cd /usr/local/openms-build/ && \
+    ## build the OpenMS executables
+    #cmake -DPYOPENMS=OFF -DCMAKE_PREFIX_PATH="/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local" -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
+    #make -j8
 
-# add openms to the list of libraries
-ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
-# add openms to the PATH
-ENV PATH /usr/local/openms-build/bin/:$PATH
+## add openms to the list of libraries
+#ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
+## add openms to the PATH
+#ENV PATH /usr/local/openms-build/bin/:$PATH
 	
 # create a user
 ENV HOME /home/user
