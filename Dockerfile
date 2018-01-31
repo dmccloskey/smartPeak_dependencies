@@ -18,7 +18,7 @@ USER root
 # ENV LANG en_US.UTF-8
 
 # SmartPeak versions
-ENV SMARTPEAK_DEPENDENCIES_VERSION master
+ENV SMARTPEAK_DEPENDENCIES_VERSION feature/openmsDep
 
 # OpenMS versions
 ENV OPENMS_VERSION merge/AbsoluteQuantitation
