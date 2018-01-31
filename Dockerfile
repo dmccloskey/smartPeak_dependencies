@@ -72,12 +72,16 @@ RUN cd /usr/local/  && \
     mkdir /usr/local/contrib-build/  && \
     # Build SmartPeak/dependencies
     cd /usr/local/contrib-build/  && \
+    cmake -DBUILD_TYPE=SEQAN ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=EIGEN ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=ZLIB ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=BZIP2 ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=GLPK ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=LIBSVM ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && \
+    cmake -DBUILD_TYPE=XERCESC ../smartPeak_dependencies && \
     cmake -DBUILD_TYPE=BOOST ../smartPeak_dependencies
     ## clone the OpenMS repository
     #cd /usr/local/  && \

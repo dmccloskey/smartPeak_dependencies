@@ -58,8 +58,8 @@
 ##       - however: exec_process seems to handle our arguments incorrectly (at least on Windows). Check functionality before you commit!
 
 # Determine what to build (all or single library)
-set( BUILD_TYPE LIST CACHE STRING "Can be used to restrict building to a single library: ALL,BOOST,GSL,COINOR,BZIP2,ZLIB,GLPK")
-set( VALID_BUILD_TYPES "ALL" "BOOST" "COINOR" "BZIP2" "ZLIB" "GLPK" "WILDMAGIC" "SQLITE")
+set( BUILD_TYPE LIST CACHE STRING "Can be used to restrict building to a single library: ALL,SEQAN,LIBSVM,XERCESC,BOOST,GSL,COINOR,BZIP2,ZLIB,GLPK,KISSFFT")
+set( VALID_BUILD_TYPES "ALL" "SEQAN" "LIBSVM" "XERCESC" "BOOST" "COINOR" "BZIP2" "ZLIB" "GLPK" "EIGEN" "WILDMAGIC" "SQLITE" "KISSFFT")
 
 # check build type
 if (BUILD_TYPE STREQUAL "HELP" OR BUILD_TYPE STREQUAL "LIST")
@@ -121,9 +121,14 @@ set (PATCH_DIR "${PROJECT_SOURCE_DIR}/patches/" CACHE STRING "Directory containi
 set(BZIP2_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/bzip2-1.0.5)
 set(ZLIB_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/zlib-1.2.8)
 set(BOOST_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/boost_1_64_0)
+set(XERCES_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/xerces-c-3.1.1)
+set(LIBSVM_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/libsvm-3.12)
+set(SEQAN_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/seqan-1.4.1)
 set(GLPK_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/glpk-4.46)
 set(COINOR_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/CoinMP-1.8.3)
+set(EIGEN_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/eigen-eigen-5a0156e40feb)
 set(WILDMAGIC_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/WildMagic5)
+set(KISSFFT_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/kissfft)
 set(SQLITE_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/sqlite-autoconf-3150000)
 
 
@@ -145,21 +150,53 @@ set(ARCHIVE_BZIP2 bzip2-1.0.5.tar.gz)
 set(ARCHIVE_BZIP2_TAR bzip2-1.0.5.tar)
 set(ARCHIVE_BZIP2_SHA1 "8b02713ea0c8eb501cc8bdac4432d7f29700f767")
 
+# set(ARCHIVE_ZLIB zlib-1.2.5.tar.gz)
+# set(ARCHIVE_ZLIB_TAR  zlib-1.2.5.tar)
+# set(ARCHIVE_ZLIB_SHA1 "8e8b93fa5eb80df1afe5422309dca42964562d7e")
+
 set(ARCHIVE_ZLIB zlib-1.2.8.tar.gz)
 set(ARCHIVE_ZLIB_TAR  zlib-1.2.8.tar)
 set(ARCHIVE_ZLIB_SHA1 "a4d316c404ff54ca545ea71a27af7dbc29817088")
+
+# set(ARCHIVE_BOOST boost_1_61_0.tar.gz)
+# set(ARCHIVE_BOOST_TAR  boost_1_61_0.tar)
+# set(ARCHIVE_BOOST_SHA1 "2d2b80771f584f327827193fcf3abf836edcdfaa")
 
 set(ARCHIVE_BOOST boost_1_64_0.tar.gz)
 set(ARCHIVE_BOOST_TAR  boost_1_64_0.tar)
 set(ARCHIVE_BOOST_SHA1 "6d983895e738e35b73c3a40b605080c4b64114e9")
 
+set(ARCHIVE_XERCES xerces-c-3.1.1-vs17.tar.gz)
+set(ARCHIVE_XERCES_TAR  xerces-c-3.1.1.tar)
+set(ARCHIVE_XERCES_SHA1 "af2bd237b8272f92dc6486f703b921a864f3006e")
+ 
+set(ARCHIVE_LIBSVM libsvm-3.12.tar.gz)
+set(ARCHIVE_LIBSVM_TAR  libsvm-3.12.tar)
+set(ARCHIVE_LIBSVM_SHA1 "6ee77eb3d89af07fe48058dba0dcc24c85020b85")
+
+set(ARCHIVE_SEQAN seqan-mini-1.4.1.tar.gz)
+set(ARCHIVE_SEQAN_TAR  seqan-mini-1.4.1.tar)
+set(ARCHIVE_SEQAN_SHA1 "1aecb390311a12330c5a1c8d91cb9ac4cd8e1718")
+
 set(ARCHIVE_GLPK glpk-4.46.tar.gz)
 set(ARCHIVE_GLPK_TAR  glpk-4.46.tar)
 set(ARCHIVE_GLPK_SHA1 "73d589452dc1d8d6a784b3f86f4268cae37420d7")
 
+#set(ARCHIVE_COINOR CoinMP-1.3.3.tar.gz)
+#set(ARCHIVE_COINOR_TAR  CoinMP-1.3.3.tar)
+#set(ARCHIVE_COINOR_SHA1 "28d29dae6abf6cdef027dcfa4961bb10b7f540cb")
+
 set(ARCHIVE_COINOR CoinMP-1.8.3-vs17.tar.gz)
 set(ARCHIVE_COINOR_TAR  CoinMP-1.8.3.tar)
 set(ARCHIVE_COINOR_SHA1 "3a6374a9dc4bb22e1ca4266dc16776c37eeef43c")
+
+set(ARCHIVE_EIGEN eigen-3.3.4.tar.gz)
+set(ARCHIVE_EIGEN_TAR  eigen-3.3.4.tar)
+set(ARCHIVE_EIGEN_SHA1 "c507baf81050b447ed00e972728170938a36d5b0")
+
+set(ARCHIVE_KISSFFT kissfft-130.tar.gz)
+set(ARCHIVE_KISSFFT_TAR kissfft-130.tar)
+set(ARCHIVE_KISSFFT_SHA1 "14ee3bd4a6480dc7fbec9a6d3a16d5d9fbbfc0fb")
 
 set(ARCHIVE_WILDMAGIC WildMagic5.tar.gz)
 set(ARCHIVE_WILDMAGIC_TAR  WildMagic5.tar)
@@ -171,11 +208,16 @@ set(ARCHIVE_SQLITE_SHA1 "b34cb4ee9710368598c62df0222f5c24dfc9c860")
 
 ## necessary for clean up .. change if install process of library changes
 set(INCLUDE_DIR_BOOST ${DEPENDENCIES_BIN_INCLUDE_DIR}/boost)
+set(INCLUDE_DIR_XERCES ${DEPENDENCIES_BIN_INCLUDE_DIR}/xercesc)
+set(INCLUDE_DIR_SEQAN ${DEPENDENCIES_BIN_INCLUDE_DIR}/seqan)
 set(INCLUDE_DIR_GLPK ${DEPENDENCIES_BIN_INCLUDE_DIR}/GLPK)
 set(INCLUDE_DIR_COINOR ${DEPENDENCIES_BIN_INCLUDE_DIR}/coin)
+set(INCLUDE_DIR_EIGEN ${DEPENDENCIES_BIN_INCLUDE_DIR}/eigen3)
 set(INCLUDE_DIR_WILDMAGIC ${DEPENDENCIES_BIN_INCLUDE_DIR}/WildMagic5)
+set(INCLUDE_DIR_KISSFFT ${DEPENDENCIES_BIN_INCLUDE_DIR}/kissfft)
 
 ## hack for simple libs that do not have include directories
+set(INCLUDE_FILES_LIBSVM ${DEPENDENCIES_BIN_INCLUDE_DIR}/svm.h)
 set(INCLUDE_FILES_BZIP2 ${DEPENDENCIES_BIN_INCLUDE_DIR}/bzlib.h ${DEPENDENCIES_BIN_INCLUDE_DIR}/bzlib_private.h)
 set(INCLUDE_FILES_ZLIB ${DEPENDENCIES_BIN_INCLUDE_DIR}/zlib.h)
 set(INCLUDE_FILES_SQLITE ${DEPENDENCIES_BIN_INCLUDE_DIR}/sqlite3.h)
@@ -340,12 +382,17 @@ endif()
 
 ## include extract/patch/build macros
 include ("${CMAKE_SOURCE_DIR}/macros.cmake")
+include ("${CMAKE_SOURCE_DIR}/libraries.cmake/seqan.cmake")
+include ("${CMAKE_SOURCE_DIR}/libraries.cmake/libsvm.cmake")
+include ("${CMAKE_SOURCE_DIR}/libraries.cmake/xercesc.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/boost.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/glpk.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/bzip2.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/zlib.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/coinor.cmake")
+include ("${CMAKE_SOURCE_DIR}/libraries.cmake/eigen.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/wildmagic.cmake")
+include ("${CMAKE_SOURCE_DIR}/libraries.cmake/kissfft.cmake")
 include ("${CMAKE_SOURCE_DIR}/libraries.cmake/sqlite.cmake")
 
 ## build mac os x specific C/C++ flags
@@ -374,6 +421,34 @@ message(STATUS "NUMBER_OF_JOBS: ${NUMBER_OF_JOBS} (maximal number of concurrent 
 
 ## define building of shared or unshared versions of the dependencies libraries
 set( BUILD_SHARED_LIBRARIES Off CACHE BOOL "Builds all dependencies libraries as shared libraries.")
+
+##################################################
+###       SEQAN                                ###
+##################################################
+
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "SEQAN")
+  SMARTPEAK_CLEAN_LIB("SEQAN")
+  SMARTPEAK_DEPENDENCIES_BUILD_SEQAN()
+endif()
+
+##################################################
+###       LIBSVM                               ###
+##################################################
+
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "LIBSVM")
+  SMARTPEAK_CLEAN_LIB("LIBSVM")
+  SMARTPEAK_DEPENDENCIES_BUILD_LIBSVM()
+endif()
+
+##################################################
+###       XERCES                               ###
+##################################################
+
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "XERCESC")
+  SMARTPEAK_CLEAN_LIB("XERCES")
+  SMARTPEAK_DEPENDENCIES_BUILD_XERCESC()
+  SMARTPEAK_COPY_LIBS("XERCES")
+endif()
 
 ##################################################
 ###       BZIP2                                ###
@@ -424,6 +499,16 @@ if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "COINOR")
 endif()
 
 ##################################################
+###       EIGEN3                               ###
+##################################################
+
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "EIGEN")
+  SMARTPEAK_CLEAN_LIB("EIGEN")
+  SMARTPEAK_DEPENDENCIES_BUILD_EIGEN()
+  SMARTPEAK_COPY_LIBS("EIGEN")
+endif()
+
+##################################################
 ###       WILDMAGIC                            ###
 ##################################################
 
@@ -431,6 +516,16 @@ if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "WILDMAGIC")
   SMARTPEAK_CLEAN_LIB("WILDMAGIC")
   SMARTPEAK_DEPENDENCIES_BUILD_WILDMAGIC()
   SMARTPEAK_COPY_LIBS("WILDMAGIC")
+endif()
+
+##################################################
+###       KISSFFT                              ###
+##################################################
+
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "KISSFFT")
+  SMARTPEAK_CLEAN_LIB("KISSFFT")
+  SMARTPEAK_DEPENDENCIES_BUILD_KISSFFT()
+  SMARTPEAK_COPY_LIBS("KISSFFT")
 endif()
 
 ##################################################
