@@ -544,7 +544,7 @@ endif()
 ###       OPENMS                               ###
 ##################################################
 
-if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "OPENSM")
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "OPENMS")
 
 # External dependencies
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/external)
