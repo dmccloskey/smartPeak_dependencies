@@ -556,6 +556,9 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/external)
 
 include (openms)
 
+message(STATUS "Building OpenMS...")
+include ("${CMAKE_SOURCE_DIR}/external/openms.cmake")
+
 endif()
 
 ## finally copy README.txt to project-binary directory to mark process complete
