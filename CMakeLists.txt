@@ -58,8 +58,8 @@
 ##       - however: exec_process seems to handle our arguments incorrectly (at least on Windows). Check functionality before you commit!
 
 # Determine what to build (all or single library)
-set( BUILD_TYPE LIST CACHE STRING "Can be used to restrict building to a single library: ALL,SEQAN,LIBSVM,XERCESC,BOOST,GSL,COINOR,BZIP2,ZLIB,GLPK,KISSFFT")
-set( VALID_BUILD_TYPES "ALL" "SEQAN" "LIBSVM" "XERCESC" "BOOST" "COINOR" "BZIP2" "ZLIB" "GLPK" "EIGEN" "WILDMAGIC" "SQLITE" "KISSFFT")
+set( BUILD_TYPE LIST CACHE STRING "Can be used to restrict building to a single library: ALL,SEQAN,LIBSVM,XERCESC,BOOST,GSL,COINOR,BZIP2,ZLIB,GLPK,KISSFFT,OPENMS")
+set( VALID_BUILD_TYPES "ALL" "SEQAN" "LIBSVM" "XERCESC" "BOOST" "COINOR" "BZIP2" "ZLIB" "GLPK" "EIGEN" "WILDMAGIC" "SQLITE" "KISSFFT" "OPENMS")
 
 # check build type
 if (BUILD_TYPE STREQUAL "HELP" OR BUILD_TYPE STREQUAL "LIST")
@@ -130,6 +130,7 @@ set(EIGEN_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/eigen-eigen-5a0156e40feb)
 set(WILDMAGIC_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/WildMagic5)
 set(KISSFFT_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/kissfft)
 set(SQLITE_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/sqlite-autoconf-3150000)
+set(OpenMS_DIR ${DEPENDENCIES_BIN_SOURCE_DIR}/OpenMS)
 
 
 ## source(archive) paths
@@ -215,6 +216,7 @@ set(INCLUDE_DIR_COINOR ${DEPENDENCIES_BIN_INCLUDE_DIR}/coin)
 set(INCLUDE_DIR_EIGEN ${DEPENDENCIES_BIN_INCLUDE_DIR}/eigen3)
 set(INCLUDE_DIR_WILDMAGIC ${DEPENDENCIES_BIN_INCLUDE_DIR}/WildMagic5)
 set(INCLUDE_DIR_KISSFFT ${DEPENDENCIES_BIN_INCLUDE_DIR}/kissfft)
+set(INCLUDE_DIR_OPENMS ${DEPENDENCIES_BIN_INCLUDE_DIR}/OpenMS)
 
 ## hack for simple libs that do not have include directories
 set(INCLUDE_FILES_LIBSVM ${DEPENDENCIES_BIN_INCLUDE_DIR}/svm.h)
@@ -536,6 +538,24 @@ if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "SQLITE")
   SMARTPEAK_CLEAN_LIB("SQLITE")
   SMARTPEAK_DEPENDENCIES_BUILD_SQLITE()
   SMARTPEAK_COPY_LIBS("SQLITE")
+endif()
+
+##################################################
+###       OPENMS                               ###
+##################################################
+
+if (BUILD_TYPE STREQUAL "ALL" OR BUILD_TYPE STREQUAL "OPENSM")
+
+# External dependencies
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/external)
+
+## Location where external projects will be downloaded
+#set (DOWNLOAD_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/downloads"
+#     CACHE PATH "Location where external projects will be downloaded.")
+#mark_as_advanced(DOWNLOAD_LOCATION)
+
+include (openms)
+
 endif()
 
 ## finally copy README.txt to project-binary directory to mark process complete
