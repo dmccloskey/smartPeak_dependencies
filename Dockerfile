@@ -21,7 +21,7 @@ USER root
 ENV SMARTPEAK_DEPENDENCIES_VERSION feature/openmsDep
 
 # OpenMS versions
-ENV OPENMS_VERSION merge/AbsoluteQuantitation
+ENV OPENMS_VERSION develop
 ENV OPENMS_REPOSITORY https://github.com/dmccloskey/OpenMS.git
 
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
@@ -37,12 +37,14 @@ RUN apk add --no-cache \
     subversion \
     libstdc++ \
     procps \
+
     # Install lapack and blas
     gfortran \
     # openblas-dev \ # either openblas or lapack
     lapack-dev \
     tk-dev \
     gdbm-dev \
+
     # Install SmartPeak dependencies
     cmake \
     g++ \
@@ -51,8 +53,41 @@ RUN apk add --no-cache \
     patch \
     libtool \
     make \
-    git && \
+    git \
+    libboost-test1.54-dev \
+
+    # Install OpenMS dependencies
+    libsvm-dev \
+    libglpk-dev \
+    libzip-dev \
+    libxerces-c-dev \
+    zlib1g-dev \
+    libbz2-dev \
+
+    # Install Boost libraries
+    libboost-date-time1.54-dev \
+    libboost-iostreams1.54-dev \
+    libboost-regex1.54-dev \
+    libboost-math1.54-dev \
+    libboost-random1.54-dev \
+
+    # Install QT5 
+    software-properties-common \
+    python-software-properties \
+    libgl1-mesa-dev && \
+    add-apt-repository ppa:beineri/opt-qt571-trusty && \
+    apt-get -y update && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+    qt57base \
+    qt57webengine \
+    qt57svg && \    
+
+    # Clean up
     # apk del .build-dependencies && \
+    apt-get clean && \
+    apt-get purge && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    
     # install cmake from source
     cd /usr/local/ && \
     wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
@@ -72,33 +107,30 @@ RUN cd /usr/local/  && \
     mkdir /usr/local/contrib-build/  && \
     # Build SmartPeak/dependencies
     cd /usr/local/contrib-build/  && \
-    cmake -DBUILD_TYPE=SEQAN ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=EIGEN ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=ZLIB ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=BZIP2 ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=GLPK ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=LIBSVM ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=XERCESC ../smartPeak_dependencies && \
-    cmake -DBUILD_TYPE=BOOST ../smartPeak_dependencies
-    ## clone the OpenMS repository
-    #cd /usr/local/  && \
-    #git clone ${OPENMS_REPOSITORY} && \
-    #cd /usr/local/OpenMS/ && \
-    #git checkout ${OPENMS_VERSION} && \
-    #cd /usr/local/ && \
-    #mkdir openms-build && \
-    #cd /usr/local/openms-build/ && \
-    ## build the OpenMS executables
-    #cmake -DPYOPENMS=OFF -DCMAKE_PREFIX_PATH="/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local" -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
-    #make -j8
+    cmake -DBUILD_TYPE=SEQAN ../contrib && rm -rf archives src && \
+    cmake -DBUILD_TYPE=WILDMAGIC ../contrib && rm -rf archives src && \
+    cmake -DBUILD_TYPE=EIGEN ../contrib && rm -rf archives src && \
+    cmake -DBUILD_TYPE=COINOR ../contrib && rm -rf archives src && \
+    cmake -DBUILD_TYPE=SQLITE ../contrib && rm -rf archives src && \
+    # clone the OpenMS repository
+    cd /usr/local/  && \
+    git clone ${OPENMS_REPOSITORY} && \
+    cd /usr/local/OpenMS/ && \
+    git checkout ${OPENMS_VERSION} && \
+    cd /usr/local/ && \
+    mkdir openms-build && \
+    cd /usr/local/openms-build/ && \
+    # define QT environment
+    QT_ENV=$(find /opt -name 'qt*-env.sh') && \
+    # source ${QT_ENV} && cmake -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH="/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local" -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
+    /bin/bash -c "source ${QT_ENV} && cmake -DWITH_GUI=OFF -DPYOPENMS=ON -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS" && \
+    make -j8
 
-## add openms to the list of libraries
-#ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
-## add openms to the PATH
-#ENV PATH /usr/local/openms-build/bin/:$PATH
+# add openms to the list of libraries
+ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
+
+# add openms to the PATH
+ENV PATH /usr/local/openms-build/bin/:$PATH
 	
 # create a user
 ENV HOME /home/user
