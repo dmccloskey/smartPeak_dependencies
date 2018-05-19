@@ -90,7 +90,7 @@ RUN apk update && \
     tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
     cd libsvm-v322 && \
     # ./configure && \
-    make all lib && \
+    make -j8 -f Makefile all lib && \
 
     # Install OpenMS dependencies from source (eigen)
     cd /usr/local/ && \
