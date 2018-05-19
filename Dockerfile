@@ -26,7 +26,8 @@ ENV OPENMS_REPOSITORY https://github.com/dmccloskey/OpenMS.git
 
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
 # procps is very common in build systems, and is a reasonably small package
-RUN apk add --no-cache \
+RUN apk update && \
+    apk add --no-cache \
     # --virtual .build-dependencies \
     bash \
     wget \
