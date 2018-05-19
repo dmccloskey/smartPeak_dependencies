@@ -86,6 +86,7 @@ RUN apk update && \
     # Install OpenMS dependencies from source (libsvm)
     cd /usr/local/ && \
     wget -O libsvm-v322.tar.gz https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
+    mkdir libsvm-v322 && \
     tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
     cd libsvm-v322 && \
     # ./configure && \
