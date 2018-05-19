@@ -75,7 +75,7 @@ RUN apk update && \
 
     # Install OpenMS dependencies (QT5) 
     # mesa-dev \
-    mesa-gl && \
+    mesa-gl \
     qt5-qtbase-dev \
     qt5-qtwebengine-dev \
     qt5-qtsvg-dev && \   
