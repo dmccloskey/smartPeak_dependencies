@@ -58,7 +58,6 @@ RUN apk update && \
     boost-unit_test_framework \
 
     # Install SmartPeak and OpenMS dependencies
-    eigen \
     sqlite-dev \
     # coinor-libcoinutils-dev \
 
@@ -85,6 +84,13 @@ RUN apk update && \
     # apk del .build-dependencies && \
 
     # Install OpenMS dependencies from source
+    cd /usr/local/ && \
+    wget -O eigen-3.3.4.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 && \
+    tar -xzvf eigen-3.3.4.tar.gz && \
+    cd eigen-3.3.4 && \
+    ./configure && \
+    make -j8 && \
+
     cd /usr/local/ && \
     wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.1.2.tar.gz && \
     tar -xvf xerces-c-3.1.2.tar.gz && \
