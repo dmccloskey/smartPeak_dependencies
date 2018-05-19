@@ -85,6 +85,14 @@ RUN apk update && \
 
     # Install OpenMS dependencies from source
     cd /usr/local/ && \
+    wget -O libsvm-v322.tar.gz https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
+    mkdir libsvm-v322 && \
+    tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
+    cd libsvm-v322 && \
+    # ./configure && \
+    make -j8 && \
+    
+    cd /usr/local/ && \
     wget -O eigen-3.3.4.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 && \
     mkdir eigen-3.3.4 && \
     tar --strip-components=1 -xvjf eigen-3.3.4.tar.bz2 -C eigen-3.3.4 && \
@@ -106,14 +114,6 @@ RUN apk update && \
     tar -xzvf glpk-4.55.tar.gz && \
     cd glpk-4.55 && \
     ./configure && \
-    make -j8 && \
-
-    cd /usr/local/ && \
-    wget -O libsvm-v322.tar.gz https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
-    mkdir libsvm-v322 && \
-    tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
-    cd libsvm-v322 && \
-    # ./configure && \
     make -j8 && \
     
     # install cmake from source
