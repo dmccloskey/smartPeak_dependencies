@@ -113,7 +113,7 @@ RUN apk update && \
     mkdir libsvm-v322 && \
     tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
     cd libsvm-v322 && \
-    ./configure && \
+    # ./configure && \
     make -j8 && \
     
     # install cmake from source
