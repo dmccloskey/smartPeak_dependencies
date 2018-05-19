@@ -116,18 +116,7 @@ RUN apk update && \
     tar -xzvf glpk-4.55.tar.gz && \
     cd glpk-4.55 && \
     ./configure && \
-    make -j8 && \
-    
-    # install cmake from source
-    cd /usr/local/ && \
-    wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
-    tar xf cmake-3.8.2.tar.gz && \
-    cd cmake-3.8.2 && \
-    ./configure && \
     make -j8
-
-# add cmake to the path
-ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
 
 # Clone the SmartPeak/dependencies repository
 RUN cd /usr/local/  && \
