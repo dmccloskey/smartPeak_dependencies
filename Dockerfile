@@ -88,85 +88,86 @@ RUN apk update && \
     wget -O libsvm-v322.tar.gz https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
     mkdir libsvm-v322 && \
     tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
-    cd libsvm-v322 && \
-    # ./configure && \
-    make -j8 -f Makefile all lib && \
+    cd libsvm-v322 
+#     && \
+#     # ./configure && \
+#     make -j8 -f Makefile all lib && \
 
-    # Install OpenMS dependencies from source (eigen)
-    cd /usr/local/ && \
-    wget -O eigen-3.3.4.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 && \
-    mkdir eigen-3.3.4 && \
-    tar --strip-components=1 -xvjf eigen-3.3.4.tar.bz2 -C eigen-3.3.4 && \
-    cd eigen-3.3.4 && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make -j8 && \
+#     # Install OpenMS dependencies from source (eigen)
+#     cd /usr/local/ && \
+#     wget -O eigen-3.3.4.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 && \
+#     mkdir eigen-3.3.4 && \
+#     tar --strip-components=1 -xvjf eigen-3.3.4.tar.bz2 -C eigen-3.3.4 && \
+#     cd eigen-3.3.4 && \
+#     mkdir build && \
+#     cd build && \
+#     cmake .. && \
+#     make -j8 && \
 
-    # Install OpenMS dependencies from source (xerces-c)
-    cd /usr/local/ && \
-    wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.1.tar.gz && \
-    tar -xvf xerces-c-3.2.1.tar.gz && \
-    cd xerces-c-3.2.1 && \
-    ./configure && \
-    make -j8 && \
+#     # Install OpenMS dependencies from source (xerces-c)
+#     cd /usr/local/ && \
+#     wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.1.tar.gz && \
+#     tar -xvf xerces-c-3.2.1.tar.gz && \
+#     cd xerces-c-3.2.1 && \
+#     ./configure && \
+#     make -j8 && \
 
-    # Install OpenMS dependencies from source (glpk)
-    cd /usr/local/ && \
-    wget ftp://ftp.gnu.org/gnu/glpk/glpk-4.55.tar.gz && \
-    tar -xzvf glpk-4.55.tar.gz && \
-    cd glpk-4.55 && \
-    ./configure && \
-    make -j8 && \
+#     # Install OpenMS dependencies from source (glpk)
+#     cd /usr/local/ && \
+#     wget ftp://ftp.gnu.org/gnu/glpk/glpk-4.55.tar.gz && \
+#     tar -xzvf glpk-4.55.tar.gz && \
+#     cd glpk-4.55 && \
+#     ./configure && \
+#     make -j8 && \
     
-    # install cmake from source
-    cd /usr/local/ && \
-    wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
-    tar xf cmake-3.8.2.tar.gz && \
-    cd cmake-3.8.2 && \
-    ./configure && \
-    make -j8
+#     # install cmake from source
+#     cd /usr/local/ && \
+#     wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
+#     tar xf cmake-3.8.2.tar.gz && \
+#     cd cmake-3.8.2 && \
+#     ./configure && \
+#     make -j8
 
-# add cmake to the path
-ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
+# # add cmake to the path
+# ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
 
-# Clone the SmartPeak/dependencies repository
-RUN cd /usr/local/  && \
-    git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
-    cd /usr/local/smartPeak_dependencies && \
-    git checkout ${SMARTPEAK_DEPENDENCIES_VERSION} && \
-    mkdir /usr/local/contrib-build/  && \
-    # Build SmartPeak/dependencies
-    cd /usr/local/contrib-build/  && \
-    cmake -DBUILD_TYPE=SEQAN ../contrib && rm -rf archives src && \
-    cmake -DBUILD_TYPE=WILDMAGIC ../contrib && rm -rf archives src && \
-    # cmake -DBUILD_TYPE=EIGEN ../contrib && rm -rf archives src && \
-    cmake -DBUILD_TYPE=COINOR ../contrib && rm -rf archives src 
-    # && \
-    # cmake -DBUILD_TYPE=SQLITE ../contrib && rm -rf archives src && \
+# # Clone the SmartPeak/dependencies repository
+# RUN cd /usr/local/  && \
+#     git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
+#     cd /usr/local/smartPeak_dependencies && \
+#     git checkout ${SMARTPEAK_DEPENDENCIES_VERSION} && \
+#     mkdir /usr/local/contrib-build/  && \
+#     # Build SmartPeak/dependencies
+#     cd /usr/local/contrib-build/  && \
+#     cmake -DBUILD_TYPE=SEQAN ../contrib && rm -rf archives src && \
+#     cmake -DBUILD_TYPE=WILDMAGIC ../contrib && rm -rf archives src && \
+#     # cmake -DBUILD_TYPE=EIGEN ../contrib && rm -rf archives src && \
+#     cmake -DBUILD_TYPE=COINOR ../contrib && rm -rf archives src 
+#     # && \
+#     # cmake -DBUILD_TYPE=SQLITE ../contrib && rm -rf archives src && \
 
-    # clone the OpenMS repository
-RUN    cd /usr/local/  && \
-    git clone ${OPENMS_REPOSITORY} && \
-    cd /usr/local/OpenMS/ && \
-    git checkout ${OPENMS_VERSION} && \
-    cd /usr/local/ && \
-    mkdir openms-build && \
-    cd /usr/local/openms-build/ && \
-    # define QT environment
-    # export QT_BASE_DIR=/opt/qt57 && \
-    # export QTDIR=$QT_BASE_DIR\n\
-    # export PATH=$QT_BASE_DIR/bin:$PATH\n\
-    # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
-    # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
-    cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
-    make -j8
+#     # clone the OpenMS repository
+# RUN    cd /usr/local/  && \
+#     git clone ${OPENMS_REPOSITORY} && \
+#     cd /usr/local/OpenMS/ && \
+#     git checkout ${OPENMS_VERSION} && \
+#     cd /usr/local/ && \
+#     mkdir openms-build && \
+#     cd /usr/local/openms-build/ && \
+#     # define QT environment
+#     # export QT_BASE_DIR=/opt/qt57 && \
+#     # export QTDIR=$QT_BASE_DIR\n\
+#     # export PATH=$QT_BASE_DIR/bin:$PATH\n\
+#     # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
+#     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
+#     cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
+#     make -j8
 
-# add openms to the list of libraries
-ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
+# # add openms to the list of libraries
+# ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
 
-# add openms to the PATH
-ENV PATH /usr/local/openms-build/bin/:$PATH
+# # add openms to the PATH
+# ENV PATH /usr/local/openms-build/bin/:$PATH
 	
 # create a user
 ENV HOME /home/user
