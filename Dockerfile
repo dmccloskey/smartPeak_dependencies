@@ -159,6 +159,7 @@ RUN apk update && \
     # && \
     # cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && rm -rf archives src && \
 
+ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV LD_LIBRARY_PATH /usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
 ENV PATH /usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
 
