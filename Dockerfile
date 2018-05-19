@@ -95,9 +95,9 @@ RUN apk update && \
     make -j8 && \
 
     cd /usr/local/ && \
-    wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.1.2.tar.gz && \
-    tar -xvf xerces-c-3.1.2.tar.gz && \
-    cd xerces-c-3.1.2 && \
+    wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.1.tar.gz && \
+    tar -xvf xerces-c-3.2.1.tar.gz && \
+    cd xerces-c-3.2.1 && \
     ./configure && \
     make -j8 && \
 
