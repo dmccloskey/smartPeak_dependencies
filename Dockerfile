@@ -18,7 +18,7 @@ USER root
 # ENV LANG en_US.UTF-8
 
 # SmartPeak versions
-ENV SMARTPEAK_DEPENDENCIES_VERSION feature/openmsDep
+ENV SMARTPEAK_DEPENDENCIES_VERSION master
 
 # OpenMS versions
 ENV OPENMS_VERSION develop
