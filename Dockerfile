@@ -85,8 +85,9 @@ RUN apk update && \
 
     # Install OpenMS dependencies from source
     cd /usr/local/ && \
-    wget -O eigen-3.3.4.tar.gz http://bitbucket.org/eigen/eigen/get/3.3.4.tar.gz && \
-    tar xf eigen-3.3.4.tar.gz && \
+    wget -O eigen-3.3.4.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 && \
+    mkdir eigen-3.3.4 && \
+    tar --strip-components=1 -xvjf eigen-3.3.4.tar.bz2 -C eigen-3.3.4 && \
     cd eigen-3.3.4 && \
     ./configure && \
     make -j8 && \
