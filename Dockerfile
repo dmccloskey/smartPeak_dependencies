@@ -177,7 +177,7 @@ RUN    cd /usr/local/  && \
     # export PATH=$QT_BASE_DIR/bin:$PATH\n\
     # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
-    cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/smartPeak_dependencies/;/usr/;/usr/local/' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
+    cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/smartPeak_dependencies/;/usr/;/usr/lib/;/usr/lib/cmake/;/usr/local/' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
     make -j8
 
 # add openms to the list of libraries
