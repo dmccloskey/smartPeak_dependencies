@@ -116,22 +116,22 @@ RUN apk update && \
     tar -xzvf glpk-4.55.tar.gz && \
     cd glpk-4.55 && \
     ./configure && \
-    make -j8
+    make -j8 && \
 
 # Clone the SmartPeak/dependencies repository
-RUN cd /usr/local/  && \
+    cd /usr/local/  && \
     git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
     cd /usr/local/smartPeak_dependencies && \
     git checkout ${SMARTPEAK_DEPENDENCIES_VERSION} && \
     mkdir /usr/local/contrib-build/  && \
     # Build SmartPeak/dependencies
     cd /usr/local/contrib-build/  && \
-    cmake -DBUILD_TYPE=SEQAN ../contrib && rm -rf archives src && \
-    cmake -DBUILD_TYPE=WILDMAGIC ../contrib && rm -rf archives src && \
-    # cmake -DBUILD_TYPE=EIGEN ../contrib && rm -rf archives src && \
-    cmake -DBUILD_TYPE=COINOR ../contrib && rm -rf archives src 
+    cmake -DBUILD_TYPE=SEQAN ../smartPeak_dependencies && rm -rf archives src && \
+    cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && rm -rf archives src && \
+    # cmake -DBUILD_TYPE=EIGEN ../smartPeak_dependencies && rm -rf archives src && \
+    cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && rm -rf archives src 
     # && \
-    # cmake -DBUILD_TYPE=SQLITE ../contrib && rm -rf archives src && \
+    # cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && rm -rf archives src && \
 
     # clone the OpenMS repository
 RUN    cd /usr/local/  && \
@@ -147,7 +147,7 @@ RUN    cd /usr/local/  && \
     # export PATH=$QT_BASE_DIR/bin:$PATH\n\
     # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
-    cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/contrib/;/usr/;/usr/local' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
+    cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/smartPeak_dependencies/;/usr/;/usr/local' -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off ../OpenMS && \
     make -j8
 
 # add openms to the list of libraries
