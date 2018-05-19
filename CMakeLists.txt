@@ -554,10 +554,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/external)
 #     CACHE PATH "Location where external projects will be downloaded.")
 #mark_as_advanced(DOWNLOAD_LOCATION)
 
-#include (openms)
-
-message(STATUS "Building OpenMS...")
-include ("${CMAKE_SOURCE_DIR}/external/openms.cmake")
+include (openms)
 
 endif()
 
