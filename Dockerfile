@@ -57,26 +57,23 @@ RUN apk add --no-cache \
     boost-unit_test_framework \
 
     # Install SmartPeak and OpenMS dependencies
-    eigen-dev \
+    eigen \
     sqlite-dev \
     # coinor-libcoinutils-dev \
 
-    # Install OpenMS dependencies
-    libsvm-dev \
-    libglpk-dev \
-    libzip-dev \
-    libxerces-c-dev \
-    zlib1g \
-    libbz2-dev \
-
-    # Install Boost libraries
+    # Install OpenMS dependencies (Boost libraries)
     boost-date_time \
     boost-iostreams \
     boost-regex \
     boost-math \
     boost-random \
 
-    # Install QT5 
+    # Install OpenMS dependencies
+    libzip-dev \
+    bzip2-dev \
+    zlib-dev \
+
+    # Install OpenMS dependencies (QT5) 
     # mesa-dev \
     mesa-gl && \
     qt5-qtbase-dev \
@@ -85,6 +82,28 @@ RUN apk add --no-cache \
 
     # Clean up
     # apk del .build-dependencies && \
+
+    # Install OpenMS dependencies from source
+    cd /usr/local/ && \
+    wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.1.2.tar.gz && \
+    tar -xvf xerces-c-3.1.2.tar.gz && \
+    cd xerces-c-3.1.2 && \
+    ./configure && \
+    make -j8 && \
+
+    cd /usr/local/ && \
+    wget ftp://ftp.gnu.org/gnu/glpk/glpk-4.55.tar.gz && \
+    tar -xzvf glpk-4.55.tar.gz && \
+    cd glpk-4.55 && \
+    ./configure && \
+    make -j8 && \
+
+    cd /usr/local/ && \
+    wget https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
+    tar -xzvf v322.tar.gz && \
+    cd v322 && \
+    ./configure && \
+    make -j8 && \
     
     # install cmake from source
     cd /usr/local/ && \
