@@ -83,15 +83,16 @@ RUN apk update && \
     # Clean up
     # apk del .build-dependencies && \
 
-    # Install OpenMS dependencies from source
+    # Install OpenMS dependencies from source (libsvm)
     cd /usr/local/ && \
     wget -O libsvm-v322.tar.gz https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
     mkdir libsvm-v322 && \
-    tar -xzvf libsvm-v322.tar.gz -C libsvm-v322 && \
+    tar -xvjf libsvm-v322.tar.gz -C libsvm-v322 && \
     cd libsvm-v322 && \
     # ./configure && \
     make -j8 && \
-    
+
+    # Install OpenMS dependencies from source (libsvm)
     cd /usr/local/ && \
     wget -O eigen-3.3.4.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 && \
     mkdir eigen-3.3.4 && \
@@ -102,6 +103,7 @@ RUN apk update && \
     cmake .. && \
     make -j8 && \
 
+    # Install OpenMS dependencies from source (libsvm)
     cd /usr/local/ && \
     wget http://www.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.1.tar.gz && \
     tar -xvf xerces-c-3.2.1.tar.gz && \
@@ -109,6 +111,7 @@ RUN apk update && \
     ./configure && \
     make -j8 && \
 
+    # Install OpenMS dependencies from source (libsvm)
     cd /usr/local/ && \
     wget ftp://ftp.gnu.org/gnu/glpk/glpk-4.55.tar.gz && \
     tar -xzvf glpk-4.55.tar.gz && \
