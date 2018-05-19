@@ -89,7 +89,6 @@ RUN apk update && \
     mkdir eigen-3.3.4 && \
     tar --strip-components=1 -xvjf eigen-3.3.4.tar.bz2 -C eigen-3.3.4 && \
     cd eigen-3.3.4 && \
-    ./configure && \
     make -j8 && \
 
     cd /usr/local/ && \
