@@ -77,7 +77,7 @@ RUN apk update && \
     # mesa-dev \
     mesa-gl \
     qt5-qtbase-dev \
-    qt5-qtwebengine-dev \
+    # qt5-qtwebengine-dev \ # in testing (may not be needed anyway)
     qt5-qtsvg-dev && \   
 
     # Clean up
