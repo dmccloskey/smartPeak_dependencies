@@ -110,8 +110,9 @@ RUN apk update && \
 
     cd /usr/local/ && \
     wget https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
-    tar -xzvf v322.tar.gz && \
-    cd v322 && \
+    mkdir libsvm-3.3.4 && \
+    tar --strip-components=1 -xvjf v322.tar.gz -C libsvm-3.3.4 && \
+    cd libsvm-3.3.4 && \
     ./configure && \
     make -j8 && \
     
