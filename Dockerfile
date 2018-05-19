@@ -83,6 +83,32 @@ RUN apk update && \
     # Clean up
     # apk del .build-dependencies && \
 
+    # Install OpenMS dependencies from source (COIN-OR)
+    # cd /usr/local/ && \
+    # wget https://www.coin-or.org/download/source/Cbc/Cbc-2.9.9.tgz && \
+    # tar -xzvf Cbc-2.9.9.tgz && \
+    # cd Cbc-2.9.9 && \
+    # ./configure && \
+    # make -j8 && \
+    # cd /usr/local/ && \
+    # wget https://www.coin-or.org/download/source/Cgl/Cgl-0.59.10.tgz && \
+    # tar -xzvf Cgl-0.59.10.tgz && \
+    # cd Cgl-0.59.10 && \
+    # ./configure && \
+    # make -j8 && \
+    # cd /usr/local/ && \
+    # wget https://www.coin-or.org/download/source/Clp/Clp-1.16.11.tgz && \
+    # tar -xzvf Clp-1.16.11.tgz && \
+    # cd Clp-1.16.11 && \
+    # ./configure && \
+    # make -j8 && \
+    cd /usr/local/ && \
+    wget https://www.coin-or.org/download/source/CoinMP/CoinMP-1.8.3.tgz && \
+    tar -xzvf CoinMP-1.8.3.tgz && \
+    cd CoinMP-1.8.3 && \
+    ./configure && \
+    make -j8 && \
+
     # Install OpenMS dependencies from source (libsvm)
     cd /usr/local/ && \
     wget -O libsvm-v322.tar.gz https://github.com/cjlin1/libsvm/archive/v322.tar.gz && \
@@ -118,7 +144,7 @@ RUN apk update && \
     ./configure && \
     make -j8 && \
 
-# Clone the SmartPeak/dependencies repository
+    # Clone the SmartPeak/dependencies repository
     cd /usr/local/  && \
     git clone https://github.com/dmccloskey/smartPeak_dependencies.git && \
     cd /usr/local/smartPeak_dependencies && \
@@ -127,9 +153,9 @@ RUN apk update && \
     # Build SmartPeak/dependencies
     cd /usr/local/contrib-build/  && \
     cmake -DBUILD_TYPE=SEQAN ../smartPeak_dependencies && rm -rf archives src && \
-    cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && rm -rf archives src && \
+    cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && rm -rf archives src
     # cmake -DBUILD_TYPE=EIGEN ../smartPeak_dependencies && rm -rf archives src && \
-    cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && rm -rf archives src 
+    # cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && rm -rf archives src && \
     # && \
     # cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && rm -rf archives src && \
 
