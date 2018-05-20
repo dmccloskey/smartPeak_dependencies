@@ -156,10 +156,6 @@ RUN apk update && \
     cd /usr/local/contrib-build/  && \
     cmake -DBUILD_TYPE=SEQAN ../smartPeak_dependencies && rm -rf archives src && \
     cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && rm -rf archives src
-    # cmake -DBUILD_TYPE=EIGEN ../smartPeak_dependencies && rm -rf archives src && \
-    # cmake -DBUILD_TYPE=COINOR ../smartPeak_dependencies && rm -rf archives src && \
-    # && \
-    # cmake -DBUILD_TYPE=SQLITE ../smartPeak_dependencies && rm -rf archives src && \
 
 ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV LD_LIBRARY_PATH /usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
@@ -180,7 +176,7 @@ RUN    cd /usr/local/  && \
     # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
     cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 \
-        -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/smartPeak_dependencies/;/usr/;/usr/local/;/usr/lib/;/usr/lib/cmake/' \
+        -DCMAKE_PREFIX_PATH='/usr/local/contrib-build;/usr/local/smartPeak_dependencies;/usr;/usr/local;/usr/lib;/usr/lib/cmake' \
         -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off \
         ../OpenMS && \
     make -j8
