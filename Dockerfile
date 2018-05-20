@@ -161,31 +161,31 @@ ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV LD_LIBRARY_PATH /usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
 ENV PATH /usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
 
-    # clone the OpenMS repository
-RUN    cd /usr/local/  && \
-    git clone ${OPENMS_REPOSITORY} && \
-    cd /usr/local/OpenMS/ && \
-    git checkout ${OPENMS_VERSION} && \
-    cd /usr/local/ && \
-    mkdir openms-build && \
-    cd /usr/local/openms-build/ && \
-    # define QT environment
-    # export QT_BASE_DIR=/opt/qt57 && \
-    # export QTDIR=$QT_BASE_DIR\n\
-    # export PATH=$QT_BASE_DIR/bin:$PATH\n\
-    # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
-    # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
-    cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 \
-        -DCMAKE_PREFIX_PATH='/usr/local/contrib-build;/usr/local/smartPeak_dependencies;/usr;/usr/local;/usr/lib;/usr/lib/cmake' \
-        -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off \
-        ../OpenMS && \
-    make -j8
+#     # clone the OpenMS repository
+# RUN    cd /usr/local/  && \
+#     git clone ${OPENMS_REPOSITORY} && \
+#     cd /usr/local/OpenMS/ && \
+#     git checkout ${OPENMS_VERSION} && \
+#     cd /usr/local/ && \
+#     mkdir openms-build && \
+#     cd /usr/local/openms-build/ && \
+#     # define QT environment
+#     # export QT_BASE_DIR=/opt/qt57 && \
+#     # export QTDIR=$QT_BASE_DIR\n\
+#     # export PATH=$QT_BASE_DIR/bin:$PATH\n\
+#     # export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH && \
+#     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
+#     cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 \
+#         -DCMAKE_PREFIX_PATH='/usr/local/contrib-build;/usr/local/smartPeak_dependencies;/usr;/usr/local;/usr/lib;/usr/lib/cmake' \
+#         -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off \
+#         ../OpenMS && \
+#     make -j8
 
-# add openms to the list of libraries
-ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
+# # add openms to the list of libraries
+# ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
 
-# add openms to the PATH
-ENV PATH /usr/local/openms-build/bin/:$PATH
+# # add openms to the PATH
+# ENV PATH /usr/local/openms-build/bin/:$PATH
 	
 # create a user
 ENV HOME /home/user
