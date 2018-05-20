@@ -62,11 +62,11 @@ RUN apk update && \
     # coinor-libcoinutils-dev \
 
     # Install OpenMS dependencies (Boost libraries)
-    boost-date_time \
-    boost-iostreams \
-    boost-regex \
-    boost-math \
-    boost-random \
+    boost-date_time=1.54.0-r0 \
+    boost-iostreams=1.54.0-r0 \
+    boost-regex=1.54.0-r0 \
+    boost-math=1.54.0-r0 \
+    boost-random=1.54.0-r0 \
 
     # Install OpenMS dependencies
     libzip-dev \
@@ -179,7 +179,7 @@ RUN    cd /usr/local/  && \
     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
     cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 \
         -DCMAKE_PREFIX_PATH='/usr/local/contrib-build/;/usr/local/smartPeak_dependencies/;/usr/;/usr/local/;/usr/lib/;/usr/lib/cmake/' \
-        -DBOOST_USE_STATIC=OFF -DBoost_NO_BOOST_CMAKE=TRUE -DBOOST_ROOT:PATHNAME='/usr' -DBoost_LIBRARY_DIRS:FILEPATH='/lib' -DHAS_XSERVER=Off \
+        -DBOOST_USE_STATIC=OFF -DHAS_XSERVER=Off \
         ../OpenMS && \
     make -j8
 
