@@ -61,13 +61,6 @@ RUN apk update && \
     sqlite-dev \
     # coinor-libcoinutils-dev \
 
-    # Install OpenMS dependencies (Boost libraries)
-    boost-date_time=1.54.0-r0 \
-    boost-iostreams=1.54.0-r0 \
-    boost-regex=1.54.0-r0 \
-    boost-math=1.54.0-r0 \
-    boost-random=1.54.0-r0 \
-
     # Install OpenMS dependencies
     libzip-dev \
     bzip2-dev \
@@ -79,6 +72,15 @@ RUN apk update && \
     qt5-qtbase-dev \
     # qt5-qtwebengine-dev \ # in testing (may not be needed anyway)
     qt5-qtsvg-dev && \   
+
+    # Install OpenMS dependencies from older repositories (Boost libraries)
+    echo 'http://dl-2.alpinelinux.org/alpine/v2.7/main' >> /etc/apk/repositories && \
+    apk add --no-cache \
+    boost-date_time=1.54.0-r1 \
+    boost-iostreams=1.54.0-r1 \
+    boost-regex=1.54.0-r1 \
+    boost-math=1.54.0-r1 \
+    boost-random=1.54.0-r1 && \ 
 
     # Clean up
     # apk del .build-dependencies && \
