@@ -66,8 +66,11 @@ RUN apk update && \
     bzip2-dev \
     zlib-dev \
 
-    # Install gcc dependencies
-    gmp-dev mpfr-dev mpc1-dev \
+    # # required for C++ 17
+    # # Install gcc dependencies (c++ 17)
+    # gmp-dev \
+    # mpfr-dev \ 
+    # mpc1-dev \
 
     # Install OpenMS dependencies (QT5) 
     # mesa-dev \
@@ -88,17 +91,18 @@ RUN apk update && \
     # Clean up
     # apk del .build-dependencies && \
 
-    # Install gcc 8.1.0 from source (c++ 17)
-    cd /usr/local/ && \
-    wget http://www.netgull.com/gcc/releases/gcc-8.1.0/gcc-8.1.0.tar.gz && \
-    tar -xf gcc-8.1.0.tar.gz && \
-    cd gcc-8.1.0 && \
-    # ./contrib/download_prerequisites && \
-    mkdir build && \
-    cd build && \
-    ../configure --prefix=/usr/local/gcc-8.1.0 --enable-languages=c,c++ --disable-multilib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu && \
-    make -j8 && \
-    make install && \
+    # # required for C++ 17
+    # # Install gcc 8.1.0 from source (c++ 17)
+    # cd /usr/local/ && \
+    # wget http://www.netgull.com/gcc/releases/gcc-8.1.0/gcc-8.1.0.tar.gz && \
+    # tar -xf gcc-8.1.0.tar.gz && \
+    # cd gcc-8.1.0 && \
+    # # ./contrib/download_prerequisites && \
+    # mkdir build && \
+    # cd build && \
+    # ../configure --prefix=/usr/local/gcc-8.1.0 --enable-languages=c,c++ --disable-multilib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu && \
+    # make -j8 && \
+    # make install && \
 
     # Install OpenMS dependencies from source (COIN-OR)
     # cd /usr/local/ && \
