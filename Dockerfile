@@ -197,8 +197,8 @@ RUN    cd /usr/local/  && \
     # export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH && \
     cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 \
         -DCMAKE_PREFIX_PATH='/usr/local/contrib-build;/usr/local/smartPeak_dependencies;/usr;/usr/local;/usr/lib;/usr/lib/cmake' \
-        -DBOOST_USE_STATIC=ON \
-        # -DBOOST_USE_DYNAMIC=ON \
+        -DBOOST_USE_STATIC=OFF \
+        -DBOOST_USE_DYNAMIC=ON \
         -DHAS_XSERVER=Off \
         ../OpenMS && \
     make -j8
