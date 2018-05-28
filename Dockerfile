@@ -21,7 +21,8 @@ USER root
 ENV SMARTPEAK_DEPENDENCIES_VERSION master
 
 # OpenMS versions
-ENV OPENMS_VERSION develop
+# ENV OPENMS_VERSION develop
+Env OPENMS_VERSION fix/BoostCMake
 ENV OPENMS_REPOSITORY https://github.com/dmccloskey/OpenMS.git
 
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
