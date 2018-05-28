@@ -56,7 +56,7 @@ RUN apk update && \
     libtool \
     make \
     git \
-    boost-unit_test_framework \
+    # boost-unit_test_framework \
 
     # Install SmartPeak and OpenMS dependencies
     sqlite-dev \
@@ -86,7 +86,8 @@ RUN apk update && \
     boost-date_time=1.54.0-r1 \
     boost-iostreams=1.54.0-r1 \
     boost-regex=1.54.0-r1 \
-    boost-math=1.54.0-r1 \
+    boost-math=1.54.0-r1 \    
+    boost-unit_test_framework=1.54.0-r1 \
     boost-random=1.54.0-r1 && \ 
 
     # Clean up
@@ -198,7 +199,7 @@ RUN    cd /usr/local/  && \
     cmake -DWITH_GUI=OFF -DPYOPENMS=OFF -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 \
         -DCMAKE_PREFIX_PATH='/usr/local/contrib-build;/usr/local/smartPeak_dependencies;/usr;/usr/local;/usr/lib;/usr/lib/cmake' \
         -DBOOST_USE_STATIC=OFF \
-        -DBOOST_USE_DYNAMIC=ON \
+        # -DBOOST_USE_DYNAMIC=ON \
         -DHAS_XSERVER=Off \
         ../OpenMS && \
     make -j8
