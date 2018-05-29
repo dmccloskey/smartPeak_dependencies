@@ -56,7 +56,7 @@ RUN apk update && \
     libtool \
     make \
     git \
-    # boost-unit_test_framework \
+    boost-unit_test_framework \
 
     # Install SmartPeak and OpenMS dependencies
     sqlite-dev \
@@ -78,17 +78,24 @@ RUN apk update && \
     mesa-gl \
     qt5-qtbase-dev \
     # qt5-qtwebengine-dev \ # in testing (may not be needed anyway)
-    qt5-qtsvg-dev && \   
+    qt5-qtsvg-dev \   
 
     # Install OpenMS dependencies from older repositories (Boost libraries)
-    echo 'http://dl-2.alpinelinux.org/alpine/v2.7/main' >> /etc/apk/repositories && \
-    apk add --no-cache \
-    boost-date_time=1.54.0-r1 \
-    boost-iostreams=1.54.0-r1 \
-    boost-regex=1.54.0-r1 \
-    boost-math=1.54.0-r1 \    
-    boost-unit_test_framework=1.54.0-r1 \
-    boost-random=1.54.0-r1 && \ 
+    # && \
+    # echo 'http://dl-2.alpinelinux.org/alpine/v2.7/main' >> /etc/apk/repositories && \
+    # apk add --no-cache \
+    # boost-date_time=1.54.0-r1 \
+    # boost-iostreams=1.54.0-r1 \
+    # boost-regex=1.54.0-r1 \
+    # boost-math=1.54.0-r1 \    
+    # boost-random=1.54.0-r1 && \ 
+
+    # Install OpenMS dependencies (Boost libraries)
+    boost-date_time \
+    boost-iostreams \
+    boost-regex \
+    boost-math \    
+    boost-random && \ 
 
     # Clean up
     # apk del .build-dependencies && \
