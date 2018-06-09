@@ -63,6 +63,7 @@ RUN apk update && \
     xf86-video-nv \ 
     flex-dev \
     bison \
+    gdb \
 
     # Install SmartPeak and OpenMS dependencies
     sqlite-dev \
