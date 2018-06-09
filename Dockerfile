@@ -58,6 +58,10 @@ RUN apk update && \
     git \
     boost-unit_test_framework \
 
+    # Install CUDA dependencies
+    linux-firmware-nvidia \
+    xf86-video-nv \ 
+
     # Install SmartPeak and OpenMS dependencies
     sqlite-dev \
     # coinor-libcoinutils-dev \
@@ -67,7 +71,7 @@ RUN apk update && \
     bzip2-dev \
     zlib-dev \
 
-    # # required for C++ 17
+    # # [NOTE: required for C++ 17]
     # # Install gcc dependencies (c++ 17)
     # gmp-dev \
     # mpfr-dev \ 
@@ -77,9 +81,10 @@ RUN apk update && \
     # mesa-dev \
     mesa-gl \
     qt5-qtbase-dev \
-    # qt5-qtwebengine-dev \ # in testing (may not be needed anyway)
+    # qt5-qtwebengine-dev \ # [NOTE: in testing (may not be needed anyway)]
     qt5-qtsvg-dev \   
 
+    # [NOTE: not needed]
     # Install OpenMS dependencies from older repositories (Boost libraries)
     # && \
     # echo 'http://dl-2.alpinelinux.org/alpine/v2.7/main' >> /etc/apk/repositories && \
@@ -100,7 +105,7 @@ RUN apk update && \
     # Clean up
     # apk del .build-dependencies && \
 
-    # # required for C++ 17
+    # # [NOTE: required for C++ 17]
     # # Install gcc 8.1.0 from source (c++ 17)
     # cd /usr/local/ && \
     # wget http://www.netgull.com/gcc/releases/gcc-8.1.0/gcc-8.1.0.tar.gz && \
@@ -113,7 +118,17 @@ RUN apk update && \
     # make -j8 && \
     # make install && \
 
+    # Install CUDA toolkit from source
+    cd /usr/local/ && \
+    wget https://developer.download.nvidia.com/compute/cuda/opensource/9.2.88/cuda-gdb-9.2.88.tar.gz && \
+    tar -xzvf cuda-gdb-9.2.88.tar.gz && \
+    cd cuda-gdb-9.2.88 && \
+    ./configure && \
+    cmake && \
+    make -j8 && \
+
     # Install OpenMS dependencies from source (COIN-OR)
+    # [NOTE: testing the use of individual packages instead of CoinMP]
     # cd /usr/local/ && \
     # wget https://www.coin-or.org/download/source/Cbc/Cbc-2.9.9.tgz && \
     # tar -xzvf Cbc-2.9.9.tgz && \
@@ -186,8 +201,8 @@ RUN apk update && \
     cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && rm -rf archives src
 
 ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
-ENV LD_LIBRARY_PATH /usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
-ENV PATH /usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda-gdb-9.2.88/lib64:/usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
+ENV PATH /usr/local/cuda-gdb-9.2.88/bin:/usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
 
     # clone the OpenMS repository
 RUN    cd /usr/local/  && \
