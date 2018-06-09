@@ -123,12 +123,16 @@ RUN apk update && \
 
     # Install CUDA toolkit from source
     cd /usr/local/ && \
-    wget https://developer.download.nvidia.com/compute/cuda/opensource/9.1.128/cuda-gdb-9.1.128.src.tar.gz && \
-    tar -xzvf cuda-gdb-9.1.128.src.tar.gz && \
-    cd cuda-gdb-9.1.128 && \
-    ./configure && \
-    cmake && \
-    make -j8 && \
+    # wget https://developer.download.nvidia.com/compute/cuda/opensource/9.1.128/cuda-gdb-9.1.128.src.tar.gz && \
+    # tar -xzvf cuda-gdb-9.1.128.src.tar.gz && \
+    # cd cuda-gdb-9.1.128 && \
+    # ./configure && \
+    # cmake && \
+    # make -j8 && \
+    wget https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda_9.2.88_396.26_linux && \
+    wget https://developer.nvidia.com/compute/cuda/9.2/Prod/patches/1/cuda_9.2.88.1_linux && \
+    chmod +x cuda_*_linux.run && \
+    ./cuda_*_linux.run --tar mxvf && \
 
     # Install OpenMS dependencies from source (COIN-OR)
     # [NOTE: testing the use of individual packages instead of CoinMP]
@@ -216,10 +220,15 @@ RUN apk update && \
 # # add cmake to the path
 # ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
 
+# add cuda to the path
+ENV PATH=/usr/local/cuda/bin:$PATH LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+# ENV LD_LIBRARY_PATH /usr/local/cuda-gdb-9.1.128/lib64:$LD_LIBRARY_PATH
+# ENV PATH /usr/local/cuda-gdb-9.1.128/bin:$PATH
+
 # update the environmental variables
 ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
-ENV LD_LIBRARY_PATH /usr/local/cuda-gdb-9.1.128/lib64:/usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
-ENV PATH /usr/local/cuda-gdb-9.1.128/bin:/usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
+ENV LD_LIBRARY_PATH /usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
+ENV PATH /usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
 
 # clone and install the OpenMS repository
 RUN    cd /usr/local/  && \
