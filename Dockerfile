@@ -120,8 +120,8 @@ RUN apk update && \
 
     # Install CUDA toolkit from source
     cd /usr/local/ && \
-    wget https://developer.download.nvidia.com/compute/cuda/opensource/9.2.88/cuda-gdb-9.2.88.tar.gz && \
-    tar -xzvf cuda-gdb-9.2.88.tar.gz && \
+    wget https://developer.download.nvidia.com/compute/cuda/opensource/9.2.88/cuda-gdb-9.2.88.src.tar.gz && \
+    tar -xzvf cuda-gdb-9.2.88.src.tar.gz && \
     cd cuda-gdb-9.2.88 && \
     ./configure && \
     cmake && \
