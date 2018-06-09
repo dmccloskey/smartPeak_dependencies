@@ -132,9 +132,11 @@ RUN apk update && \
     wget https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda_9.2.88_396.26_linux && \
     chmod +x cuda_9.2.88_396.26_linux && \
     ./cuda_9.2.88_396.26_linux --tar mxvf && \
+    ./cuda-installer.pl --silent --accept-eula --driver --toolkit && \
     wget https://developer.nvidia.com/compute/cuda/9.2/Prod/patches/1/cuda_9.2.88.1_linux && \
     chmod +x cuda_9.2.88.1_linux && \
     ./cuda_9.2.88.1_linux --tar mxvf && \
+    ./install_patch.pl --silent --accept-eula && \
 
     # Install OpenMS dependencies from source (COIN-OR)
     # [NOTE: testing the use of individual packages instead of CoinMP]
@@ -221,7 +223,7 @@ RUN apk update && \
 # ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
 
 # add cuda to the path
-ENV PATH=/usr/local/cuda/bin:$PATH LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+ENV PATH=/usr/local/cuda-9.2/bin:$PATH LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH
 # ENV LD_LIBRARY_PATH /usr/local/cuda-gdb-9.1.128/lib64:$LD_LIBRARY_PATH
 # ENV PATH /usr/local/cuda-gdb-9.1.128/bin:$PATH
 
