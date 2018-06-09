@@ -61,6 +61,7 @@ RUN apk update && \
     # Install CUDA dependencies
     # linux-firmware-nvidia \
     xf86-video-nv \ 
+    flex-dev \
 
     # Install SmartPeak and OpenMS dependencies
     sqlite-dev \
