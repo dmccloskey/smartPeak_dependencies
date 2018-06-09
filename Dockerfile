@@ -59,7 +59,7 @@ RUN apk update && \
     boost-unit_test_framework \
 
     # Install CUDA dependencies
-    linux-firmware-nvidia \
+    # linux-firmware-nvidia \
     xf86-video-nv \ 
 
     # Install SmartPeak and OpenMS dependencies
