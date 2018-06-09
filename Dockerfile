@@ -130,9 +130,11 @@ RUN apk update && \
     # cmake && \
     # make -j8 && \
     wget https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda_9.2.88_396.26_linux && \
+    chmod +x cuda_9.2.88_396.26_linux && \
+    ./cuda_9.2.88_396.26_linux --tar mxvf && \
     wget https://developer.nvidia.com/compute/cuda/9.2/Prod/patches/1/cuda_9.2.88.1_linux && \
-    chmod +x cuda_*_linux.run && \
-    ./cuda_*_linux.run --tar mxvf && \
+    chmod +x cuda_9.2.88.1_linux && \
+    ./cuda_9.2.88.1_linux --tar mxvf && \
 
     # Install OpenMS dependencies from source (COIN-OR)
     # [NOTE: testing the use of individual packages instead of CoinMP]
