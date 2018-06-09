@@ -122,9 +122,9 @@ RUN apk update && \
 
     # Install CUDA toolkit from source
     cd /usr/local/ && \
-    wget https://developer.download.nvidia.com/compute/cuda/opensource/9.2.106/cuda-gdb-9.2.106.src.tar.gz && \
-    tar -xzvf cuda-gdb-9.2.106.src.tar.gz && \
-    cd cuda-gdb-9.2.106 && \
+    wget https://developer.download.nvidia.com/compute/cuda/opensource/9.1.128/cuda-gdb-9.1.128.src.tar.gz && \
+    tar -xzvf cuda-gdb-9.1.128.src.tar.gz && \
+    cd cuda-gdb-9.1.128 && \
     ./configure && \
     cmake && \
     make -j8 && \
@@ -190,6 +190,14 @@ RUN apk update && \
     cd glpk-4.55 && \
     ./configure && \
     make -j8 && \
+    
+    # # install cmake from source (may be needed for cuda and c++17)
+    # cd /usr/local/ && \
+    # wget http://www.cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
+    # tar xf cmake-3.8.2.tar.gz && \
+    # cd cmake-3.8.2 && \
+    # ./configure && \
+    # make -j8 && \
 
     # Clone the SmartPeak/dependencies repository
     cd /usr/local/  && \
@@ -202,11 +210,17 @@ RUN apk update && \
     cmake -DBUILD_TYPE=SEQAN ../smartPeak_dependencies && rm -rf archives src && \
     cmake -DBUILD_TYPE=WILDMAGIC ../smartPeak_dependencies && rm -rf archives src
 
-ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
-ENV LD_LIBRARY_PATH /usr/local/cuda-gdb-9.2.88/lib64:/usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
-ENV PATH /usr/local/cuda-gdb-9.2.88/bin:/usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
+    
 
-    # clone the OpenMS repository
+# # add cmake to the path
+# ENV PATH /usr/local/cmake-3.8.2/bin:$PATH
+
+# update the environmental variables
+ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:$PKG_CONFIG_PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda-gdb-9.1.128/lib64:/usr/local/CoinMP-1.8.3/lib:/usr/local/libsvm-322/lib:/usr/local/eigen-3.3.4/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/glpk-4.55/lib:/usr/lib:$LD_LIBRARY_PATH
+ENV PATH /usr/local/cuda-gdb-9.1.128/bin:/usr/local/CoinMP-1.8.3/bin:/usr/local/libsvm-322/bin:/usr/local/eigen-3.3.4/bin:/usr/local/xerces-c-3.2.1/bin:/usr/local/glpk-4.55/bin:/usr/bin:$PATH
+
+# clone and install the OpenMS repository
 RUN    cd /usr/local/  && \
     git clone ${OPENMS_REPOSITORY} && \
     cd /usr/local/OpenMS/ && \
@@ -228,11 +242,11 @@ RUN    cd /usr/local/  && \
         ../OpenMS && \
     make -j8
 
-# # add openms to the list of libraries
-# ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
+# add openms to the list of libraries
+ENV LD_LIBRARY_PATH /usr/local/openms-build/lib/:$LD_LIBRARY_PATH
 
-# # add openms to the PATH
-# ENV PATH /usr/local/openms-build/bin/:$PATH
+# add openms to the PATH
+ENV PATH /usr/local/openms-build/bin/:$PATH
 	
 # create a user
 ENV HOME /home/user
