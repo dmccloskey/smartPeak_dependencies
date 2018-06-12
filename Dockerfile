@@ -21,8 +21,8 @@ USER root
 ENV SMARTPEAK_DEPENDENCIES_VERSION master
 
 # OpenMS versions
-# ENV OPENMS_VERSION develop
-Env OPENMS_VERSION fix/BoostCMake
+ENV OPENMS_VERSION develop
+# Env OPENMS_VERSION fix/BoostCMake
 ENV OPENMS_REPOSITORY https://github.com/dmccloskey/OpenMS.git
 
 # Installation of debian-deps:latest #[and curl from debian-curl:latest]
@@ -132,7 +132,8 @@ RUN apk update && \
     wget https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda_9.2.88_396.26_linux && \
     chmod +x cuda_9.2.88_396.26_linux && \
     ./cuda_9.2.88_396.26_linux --tar mxvf && \
-    ./cuda-installer.pl --silent --accept-eula --driver --toolkit && \
+    ./cuda-installer.pl --silent --driver && \
+    ./cuda-installer.pl --silent --toolkit && \
     wget https://developer.nvidia.com/compute/cuda/9.2/Prod/patches/1/cuda_9.2.88.1_linux && \
     chmod +x cuda_9.2.88.1_linux && \
     ./cuda_9.2.88.1_linux --tar mxvf && \
